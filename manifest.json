@@ -1,0 +1,109 @@
+{
+    "name": "Wyzwanie 2025",
+    "short_name": "Wyzwanie25",
+    "description": "Aplikacja do śledzenia wyzwania sportowego 2025",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#005dac",
+    "theme_color": "#005dac",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "/icon-72x72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icon-96x96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icon-128x128.png",
+            "sizes": "128x128",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icon-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icon-152x152.png",
+            "sizes": "152x152",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icon-384x384.png",
+            "sizes": "384x384",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/maskable-icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Ranking",
+            "short_name": "Ranking",
+            "description": "Zobacz aktualny ranking uczestników",
+            "url": "/#ranking",
+            "icons": [
+                {
+                    "src": "/shortcut-ranking-96x96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Aktywności",
+            "short_name": "Aktywności",
+            "description": "Zobacz ostatnie aktywności uczestników",
+            "url": "/#activities",
+            "icons": [
+                {
+                    "src": "/shortcut-activities-96x96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/screenshot-1.png",
+            "sizes": "1280x720",
+            "type": "image/png"
+        },
+        {
+            "src": "/screenshot-2.png",
+            "sizes": "1280x720",
+            "type": "image/png"
+        }
+    ],
+    "related_applications": [],
+    "prefer_related_applications": false,
+    "categories": ["fitness", "sports", "lifestyle"],
+    "lang": "pl-PL",
+    "dir": "ltr"
+}
