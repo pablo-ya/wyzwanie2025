@@ -1,224 +1,2595 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wyzwanie 2025</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="ikony/favicon.ico" type="image/x-icon">
-  <link rel="apple-touch-icon" href="ikony/icon-192.png">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: black;
-      color: white;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#005dac">
+    <meta name="description" content="Aplikacja do śledzenia wyzwania sportowego 2025">
+    <title>Wyzwanie 2025</title>
     
-    header {
-      padding: 20px;
-      border-bottom: 1px solid #333;
-      text-align: center;
-    }
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIld5endh
+bmllIDIwMjUiLAogICJzaG9ydF9uYW1lIjogIld5endh
+bmllIDIwMjUiLAogICJzdGFydF91cmwiOiAiaW5kZXgu
+aHRtbCIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIs
+CiAgIm9yaWVudGF0aW9uIjogInBvcnRyYWl0IiwKICAi
+YmFja2dyb3VuZF9jb2xvciI6ICIjMDA1ZGFjIiwKICAi
+dGhlbWVfY29sb3IiOiAiIzAwNWRhYyIsCiAgImljb25z
+IjogWwogICAgewogICAgICAic3JjIjogImRhdGE6aW1h
+Z2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjNhV1IwYUQw
+aU1UQXdJaUJvWldsbmFIUTlJakV3TUNJZ2RtbGxkMEp2
+ZUQwaU1DQXdJREV3TUNBeE1EQWlJSGh0Ykc1elBTSm9k
+SFJ3T2k4dmQzZDNMbmN6TG05eVp5OHlNREF3TDNOMlp5
+SStQSEpsWTNRZ2QybGtkR2c5SWpFd01DSWdhR1ZwWjJo
+MFBTSXhNREFpSUdacGJHdzlJaU13TURBM1pDSXZQanhu
+SUhOMGVXeGxQU0ptYVd4c0xXTjBZV05sT21OcGNtTnNa
+U0lnWm1sc2JEMGlJekF3TlRaa1l5SWdhbUZwYzNSMGVX
+eGxQU0p5YjNWdVpDSWdkSEpoYm5ObWIzSnRQU0owY21G
+dWMyWnZjbTBvTVRRMUxERTBOU2tpSUc5dVkzTnNhV05y
+UFNKbGRtVnVkRjl2ZFhSbGNtVmtJaUIyWlhKMGFXTmhi
+R0ZzYVdkdVBTSndZWFJvTFcxcFpHUXNkR1Y0ZENJdlBq
+eHpkbWNnZDJsa2RHZzlJakUzT0NJZ2FHVnBaMmgwUFNJ
+eE56Z2lJSFpwWlhkQ2IzZzlJakFnTUNBeE56Z2dNVGM0
+SWlCNGJXeHVjejBpYUhSMGNEb3ZMM2QzZHk1M015NXZj
+bWN2TWpBd01DOXpkbWNpUGp4eVpXTjBJSGRwWkhSb1BT
+SXhOemdpSUdobGFXZG9kRDBpTVRjNElpQm1hV3hzUFNJ
+ak1EQXdNRFprSWk4K1BITndZVzRnWm1sc2JEMGlJekF3
+TURCRVRRPT0iLAogICAgICAic2l6ZXMiOiAiMTgweDE4
+MCIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwi
+CiAgICB9LAogICAgewogICAgICAic3JjIjogImRhdGE6
+aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjNhV1Iw
+YUQwaU1USXdJaUJvWldsbmFIUTlJakV5TUNJZ2RtbGxk
+MEp2ZUQwaU1DQXdJREV5TUNBeE1qQWlJSGh0Ykc1elBT
+Sm9kSFJ3T2k4dmQzZDNMbmN6TG05eVp5OHlNREF3TDNO
+Mlp5SStQSEpsWTNRZ2QybGtkR2c5SWpFeU1DSWdhR1Zw
+WjJoMFBTSXhNakFpSUdacGJHdzlJaU13TURBM1pDSXZQ
+anhuSUhOMGVXeGxQU0ptYVd4c0xXTjBZV05sT21OcGNt
+TnNaU0lnWm1sc2JEMGlJekF3TlRaa1l5SWdhbUZwYzNS
+MGVXeGxQU0p5YjNWdVpDSWdkSEpoYm5ObWIzSnRQU0ow
+Y21GdWMyWnZjbTBvTVRRMUxERTBOU2tpSUc5dVkzTnNh
+V05yUFNKbGRtVnVkRjl2ZFhSbGNtVmtJaUIyWlhKMGFX
+TmhiR0ZzYVdkdVBTSndZWFJvTFcxcFpHUXNkR1Y0ZENJ
+dlBqeHpkbWNnZDJsa2RHZzlJakV6T0NJZ2FHVnBaMmgw
+UFNJeE16Z2lJSFpwWlhkQ2IzZzlJakFnTUNBeE16Z2dN
+VE00SWlCNGJXeHVjejBpYUhSMGNEb3ZMM2QzZHk1M015
+NXZjbWN2TWpBd01DOXpkbWNpUGp4eVpXTjBJSGRwWkhS
+b1BTSXhNemdpSUdobGFXZG9kRDBpTVRNNElpQm1hV3hz
+UFNJak1EQXdNRFprSWk4K1BITndZVzRnWm1sc2JEMGlJ
+ekF3TURCRVRRPT0iLAogICAgICAic2l6ZXMiOiAiMTIw
+eDEyMCIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4
+bWwiCiAgICB9LAogICAgewogICAgICAic3JjIjogImRh
+dGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjNh
+V1IwYUQwaU5qUWlJR2hsYVdkb2REMGlOalFpSUhacFpY
+ZENiM2c5SWpBZ01DQTJOQzQwSURZMExqUWlJSGh0Ykc1
+elBTSm9kSFJ3T2k4dmQzZDNMbmN6TG05eVp5OHlNREF3
+TDNOMlp5SStQSEpsWTNRZ2QybGtkR2c5SWpZMElpQm9a
+V2xuYUhROUlqWTBJaUJtYVd4c1BTSWpNREF3TURaa0lp
+OCtQR2NnYzNSNWJHVTlJbVpwYkd3dFkzUmhZMlU2WTJs
+eVkyeGxJaUJtYVd4c1BTSWpNREExTm1SaklpQnFZV2x6
+ZEhSNWJHVTlJbkp2ZFc1a0lpQjBjbUZ1YzJadmNtMDlJ
+blJ5WVc1elptOXliU2d4TkRVc01UUTFLVElpSUc5dVkz
+TnNhV05yUFNKbGRtVnVkRjl2ZFhSbGNtVmtJaUIyWlhK
+MGFXTmhiR0ZzYVdkdVBTSndZWFJvTFcxcFpHUXNkR1Y0
+ZENJdlBqeHpkbWNnZDJsa2RHZzlJall3SWlCb1pXbG5h
+SFE5SWpZd0lpQjJhV1YzUW05NFBTSXdJREFnTmpBZ05q
+QWlJSGh0Ykc1elBTSm9kSFJ3T2k4dmQzZDNMbmN6TG05
+eVp5OHlNREF3TDNOMlp5SStQSEpsWTNRZ2QybGtkR2c5
+SWpZd0lpQm9aV2xuYUhROUlqWXdJaUJtYVd4c1BTSWpN
+REF3TURaa0lpOCtQSE53WVc0Z1ptbHNiRDBpSXpBd01E
+QkVUUT09IiwKICAgICAgInNpemVzIjogIjY0eDY0Iiwg
+CiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiCiAg
+ICB9CiAgXQp9">
     
-    header h1 {
-      margin: 0;
-      font-size: 24px;
-      font-weight: normal;
-    }
-    
-    .licznik {
-      padding: 20px;
-      font-size: 1.1rem;
-      text-align: center;
-      border-bottom: 1px solid #333;
-    }
+    <!-- PWA Icons -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDYiLz48ZyBzdHlsZT0iZmlsbC1jdGFjZTpjaXJjbGUiIGZpbGw9IiMwMDVkYWMiIGphaXN0dHlsZT0icm91bmQiIHRyYW5zZm9ybT0idHJhbnNmb3JtKDE0NSwxNDUpIiBvbmNsaWNrPSJldmVudF9vdXRlcmVkIiB2ZXJ0aWNhbGFsaWduPSJwYXRoLW1pZGQsdGV4dCI+PC9nPjxzdmcgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiB2aWV3Qm94PSIwIDAgNjAgNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjMDAwMDA2Ii8+PHNwYW4gZmlsbD0iIzAwMDBETQ==">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE4MCAxODAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjE4MCIgaGVpZ2h0PSIxODAiIGZpbGw9IiMwMDAwMDYiLz48ZyBzdHlsZT0iZmlsbC1jdGFjZTpjaXJjbGUiIGZpbGw9IiMwMDVkYWMiIGphaXN0dHlsZT0icm91bmQiIHRyYW5zZm9ybT0idHJhbnNmb3JtKDE0NSwxNDUpIiBvbmNsaWNrPSJldmVudF9vdXRlcmVkIiB2ZXJ0aWNhbGFsaWduPSJwYXRoLW1pZGQsdGV4dCI+PC9nPjxzdmcgd2lkdGg9IjE3OCIgaGVpZ2h0PSIxNzgiIHZpZXdCb3g9IjAgMCAxNzggMTc4IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxNzgiIGhlaWdodD0iMTc4IiBmaWxsPSIjMDAwMDA2Ii8+PHNwYW4gZmlsbD0iIzAwMDBETQ==">
 
-    #dolacz-button {
-      display: block;
-      margin: 20px auto;
-      padding: 15px 30px;
-      font-size: 1.1rem;
-      background-color: #0ea3ff;
-      color: black;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-    }
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     
-    .wykres-container {
-      padding: 20px;
-    }
+    <style>
+        :root {
+            --primary-color: #005dac;
+            --secondary-color: #1cb954;
+            --text-color: #343434;
+            --light-text: #6e6e6e;
+            --background-color: #f5f5f5;
+            --card-background: #ffffff;
+            --runner-color: #FF5722;
+            --cyclist-color: #2196F3;
+            --combined-color: #9C27B0;
+            --gold-color: #FFD700;
+            --silver-color: #C0C0C0;
+            --bronze-color: #CD7F32;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --card-shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.15);
+            --radius: 8px;
+            --header-height: 60px;
+            --footer-height: 50px;
+            --safe-area-inset-top: env(safe-area-inset-top, 0px);
+            --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+            --safe-area-inset-left: env(safe-area-inset-left, 0px);
+            --safe-area-inset-right: env(safe-area-inset-right, 0px);
+        }
 
-    .ranking {
-      padding: 20px;
-    }
-    
-    .uczestnik {
-      background: #222;
-      border-radius: 10px;
-      padding: 15px;
-      margin-bottom: 15px;
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-    
-    .uczestnik img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      margin-right: 15px;
-    }
-    
-    .uczestnik h3 {
-      margin: 0 0 5px;
-      font-size: 1.1rem;
-    }
-    
-    .uczestnik p {
-      margin: 0;
-      font-size: 0.9rem;
-      color: #aaa;
-    }
-    
-    .odznaka {
-      position: absolute;
-      right: 15px;
-      top: 15px;
-      background-color: gold;
-      color: black;
-      font-weight: bold;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-    }
-    
-    .pasek-postepu {
-      margin-top: 10px;
-      height: 5px;
-      background-color: #333;
-      border-radius: 5px;
-      overflow: hidden;
-    }
-    
-    .pasek-postepu .wypelnienie {
-      height: 100%;
-      border-radius: 5px;
-    }
-    
-    .aktywnosci {
-      padding: 20px;
-    }
-    
-    .aktywnosc {
-      background-color: #222;
-      border-radius: 10px;
-      padding: 15px;
-      margin-bottom: 15px;
-    }
-    
-    .aktywnosc-naglowek {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-    
-    .aktywnosc-naglowek h3 {
-      margin: 0;
-      font-size: 1.1rem;
-    }
-    
-    .aktywnosc-naglowek img {
-      height: 30px;
-    }
-    
-    .aktywnosc p {
-      margin: 0 0 5px;
-      color: #aaa;
-    }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary-color: #0073d8;
+                --secondary-color: #22d466;
+                --text-color: #f0f0f0;
+                --light-text: #c0c0c0;
+                --background-color: #121212;
+                --card-background: #212121;
+                --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+                --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                --card-shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.4);
+            }
+        }
 
-    nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background-color: black;
-      border-top: 1px solid #333;
-      display: flex;
-      justify-content: space-around;
-      padding: 10px 0;
-    }
-    
-    nav a {
-      color: #888;
-      text-decoration: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    
-    nav a.active {
-      color: #0ea3ff;
-    }
-    
-    nav img {
-      height: 25px;
-      margin-bottom: 5px;
-    }
-  </style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            padding: calc(var(--header-height) + var(--safe-area-inset-top)) 0 calc(var(--footer-height) + var(--safe-area-inset-bottom)) 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.standalone {
+            padding-bottom: calc(var(--footer-height) + var(--safe-area-inset-bottom) + 30px);
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--primary-color);
+            color: white;
+            height: calc(var(--header-height) + var(--safe-area-inset-top));
+            padding-top: var(--safe-area-inset-top);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        main {
+            flex: 1;
+            padding: 16px;
+            padding-left: calc(16px + var(--safe-area-inset-left));
+            padding-right: calc(16px + var(--safe-area-inset-right));
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--primary-color);
+            color: white;
+            height: calc(var(--footer-height) + var(--safe-area-inset-bottom));
+            padding-bottom: var(--safe-area-inset-bottom);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-nav {
+            display: none;
+        }
+
+        body.standalone .mobile-nav {
+            display: flex;
+            position: fixed;
+            bottom: var(--safe-area-inset-bottom);
+            left: 0;
+            right: 0;
+            height: 60px;
+            background-color: var(--card-background);
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+        }
+
+        .mobile-nav-buttons {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .mobile-nav-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.7rem;
+            padding: 5px;
+            width: 25%;
+        }
+
+        .mobile-nav-btn i {
+            font-size: 1.5rem;
+            margin-bottom: 2px;
+        }
+
+        .mobile-nav-btn.active {
+            color: var(--primary-color);
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+            margin-bottom: 16px;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .section {
+            background-color: var(--card-background);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 24px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title i {
+            margin-right: 8px;
+            color: var(--primary-color);
+            font-size: 1.4rem;
+        }
+
+        .btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        .btn-secondary {
+            background-color: var(--primary-color);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .btn-disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Rules section */
+        .rules {
+            margin-bottom: 24px;
+        }
+
+        .countdown {
+            margin-top: 16px;
+            margin-bottom: 24px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .countdown i {
+            margin-right: 8px;
+        }
+
+        .join-btn-container {
+            display: flex;
+            justify-content: center;
+            margin: 24px 0;
+        }
+
+        /* Progress Chart */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-bottom: 24px;
+        }
+
+        /* Participants */
+        .participants-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .participant-card {
+            background-color: var(--card-background);
+            border-radius: var(--radius);
+            padding: 16px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .participant-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .participant-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .participant-rank {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--light-text);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+
+        .rank-1 {
+            background-color: var(--gold-color);
+            color: black;
+        }
+
+        .rank-2 {
+            background-color: var(--silver-color);
+            color: black;
+        }
+
+        .rank-3 {
+            background-color: var(--bronze-color);
+            color: white;
+        }
+
+        .participant-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 12px;
+            border: 3px solid transparent;
+        }
+
+        .runner .participant-avatar {
+            border-color: var(--runner-color);
+        }
+
+        .cyclist .participant-avatar {
+            border-color: var(--cyclist-color);
+        }
+
+        .combined .participant-avatar {
+            border-color: var(--combined-color);
+        }
+
+        .participant-info {
+            flex: 1;
+        }
+
+        .participant-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .participant-role {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-top: 4px;
+            color: white;
+        }
+
+        .runner .participant-role {
+            background-color: var(--runner-color);
+        }
+
+        .cyclist .participant-role {
+            background-color: var(--cyclist-color);
+        }
+
+        .combined .participant-role {
+            background-color: var(--combined-color);
+        }
+
+        .participant-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .stat-label {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        .stat-value {
+            font-weight: 600;
+        }
+
+        .progress-container {
+            margin-top: 12px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .runner .progress-fill {
+            background-color: var(--runner-color);
+        }
+
+        .cyclist .progress-fill {
+            background-color: var(--cyclist-color);
+        }
+
+        .combined .progress-fill {
+            background-color: var(--combined-color);
+        }
+
+        .progress-label {
+            font-size: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 4px;
+            color: var(--light-text);
+        }
+
+        /* Activity list */
+        .activities-container {
+            margin-bottom: 24px;
+        }
+
+        .activity-list {
+            list-style: none;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: white;
+        }
+
+        .run-icon {
+            background-color: var(--runner-color);
+        }
+
+        .ride-icon {
+            background-color: var(--cyclist-color);
+        }
+
+        .activity-details {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 600;
+        }
+
+        .activity-meta {
+            display: flex;
+            color: var(--light-text);
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        .activity-meta div {
+            margin-right: 12px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 8px;
+        }
+
+        .page-btn {
+            padding: 6px 12px;
+            border: 1px solid var(--primary-color);
+            background: transparent;
+            color: var(--primary-color);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .page-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .page-btn:disabled {
+            border-color: #ccc;
+            color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background-color: var(--card-background);
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 24px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.visible .modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .modal-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--light-text);
+        }
+
+        .modal-body {
+            margin-bottom: 24px;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        /* Role selection */
+        .role-selection {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .role-card {
+            border: 2px solid transparent;
+            border-radius: var(--radius);
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .role-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .role-card.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(0, 93, 172, 0.05);
+        }
+
+        .role-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .runner-role .role-icon {
+            color: var(--runner-color);
+        }
+
+        .cyclist-role .role-icon {
+            color: var(--cyclist-color);
+        }
+
+        .combined-role .role-icon {
+            color: var(--combined-color);
+        }
+
+        .role-name {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .role-description {
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+
+        /* Loading */
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(0, 93, 172, 0.2);
+            border-left-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 16px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Badges and Achievements */
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .badge-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background-color: var(--card-background);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            box-shadow: var(--shadow);
+            position: relative;
+            color: var(--light-text);
+        }
+
+        .badge-icon i {
+            font-size: 1.8rem;
+        }
+
+        .badge.unlocked .badge-icon {
+            color: var(--primary-color);
+            background-color: rgba(0, 93, 172, 0.1);
+        }
+
+        .badge-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .badge-description {
+            font-size: 0.7rem;
+            color: var(--light-text);
+        }
+
+        /* Heat Map */
+        .heat-map {
+            margin-top: 24px;
+        }
+
+        .heat-map-container {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+
+        .heat-map-label {
+            display: grid;
+            grid-template-columns: 40px repeat(7, 1fr);
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+
+        .heat-map-day {
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--light-text);
+        }
+
+        .heat-map-week {
+            display: grid;
+            grid-template-columns: 40px repeat(7, 1fr);
+            gap: 4px;
+            margin-bottom: 4px;
+        }
+
+        .heat-map-week-label {
+            font-size: 0.7rem;
+            color: var(--light-text);
+            display: flex;
+            align-items: center;
+        }
+
+        .heat-map-cell {
+            aspect-ratio: 1;
+            border-radius: 2px;
+            background-color: #eee;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .heat-map-cell:hover {
+            transform: scale(1.1);
+        }
+
+        .heat-cell-0 { background-color: #eee; }
+        .heat-cell-1 { background-color: #c6e48b; }
+        .heat-cell-2 { background-color: #7bc96f; }
+        .heat-cell-3 { background-color: #239a3b; }
+        .heat-cell-4 { background-color: #196127; }
+
+        /* Level badges */
+        .level-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--card-background);
+        }
+
+        /* Avatar frames */
+        .avatar-frame-1 {
+            border: 3px solid #c6e48b;
+        }
+
+        .avatar-frame-2 {
+            border: 3px solid #7bc96f;
+        }
+
+        .avatar-frame-3 {
+            border: 3px solid #239a3b;
+        }
+
+        .avatar-frame-4 {
+            border: 3px solid #196127;
+        }
+
+        .avatar-frame-5 {
+            border: 3px solid gold;
+            box-shadow: 0 0 10px gold;
+        }
+
+        /* Streak badges */
+        .streak-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 0.7rem;
+            padding: 3px 6px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .streak-badge i {
+            font-size: 0.8rem;
+            margin-right: 3px;
+        }
+
+        /* High five button */
+        .high-five-btn {
+            background: none;
+            border: none;
+            color: var(--light-text);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            margin-top: 12px;
+        }
+
+        .high-five-btn i {
+            margin-right: 4px;
+        }
+
+        .high-five-btn:hover {
+            color: var(--primary-color);
+        }
+
+        .high-five-count {
+            margin-left: 4px;
+            background-color: rgba(0, 93, 172, 0.1);
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+
+        /* Install Banner */
+        .install-banner {
+            position: fixed;
+            bottom: calc(var(--footer-height) + var(--safe-area-inset-bottom));
+            left: 0;
+            right: 0;
+            background-color: var(--card-background);
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 900;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .install-banner.visible {
+            transform: translateY(0);
+        }
+
+        .install-message {
+            flex: 1;
+            margin-right: 12px;
+        }
+
+        .install-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* Admin panel */
+        .admin-panel {
+            background-color: var(--card-background);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 24px;
+            display: none;
+        }
+
+        .admin-section {
+            margin-bottom: 24px;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 16px;
+        }
+
+        .admin-card {
+            background-color: var(--card-background);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: var(--radius);
+            padding: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: var(--card-background);
+            color: var(--text-color);
+        }
+
+        /* Confetti animation */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            pointer-events: none;
+            animation: confetti-fall 5s linear forwards, confetti-shake 3s ease-in-out infinite;
+        }
+
+        @keyframes confetti-fall {
+            0% { top: -10%; opacity: 1; }
+            80% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        @keyframes confetti-shake {
+            0% { transform: skew(0deg, 0deg); }
+            25% { transform: skew(5deg, 5deg); }
+            50% { transform: skew(0deg, 0deg); }
+            75% { transform: skew(-5deg, 5deg); }
+            100% { transform: skew(0deg, 0deg); }
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: calc(var(--header-height) + var(--safe-area-inset-top) + 20px);
+            right: 20px;
+            background-color: var(--card-background);
+            color: var(--text-color);
+            padding: 12px 16px;
+            border-radius: var(--radius);
+            box-shadow: var(--card-shadow);
+            z-index: 1500;
+            max-width: 350px;
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.visible {
+            transform: translateX(0);
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .notification-icon {
+            margin-right: 12px;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .notification-message {
+            flex: 1;
+        }
+
+        .notification-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .participants-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .role-selection {
+                grid-template-columns: 1fr;
+            }
+
+            .achievement-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .achievement-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Font Awesome Icons */
+        .fa {
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            line-height: 1;
+        }
+
+        .fa-running:before { content: "🏃"; }
+        .fa-biking:before { content: "🚴"; }
+        .fa-medal:before { content: "🏅"; }
+        .fa-chart-line:before { content: "📈"; }
+        .fa-users:before { content: "👥"; }
+        .fa-history:before { content: "🕒"; }
+        .fa-clock:before { content: "⏰"; }
+        .fa-calendar:before { content: "📅"; }
+        .fa-user-plus:before { content: "👤+"; }
+        .fa-check:before { content: "✓"; }
+        .fa-times:before { content: "✕"; }
+        .fa-trophy:before { content: "🏆"; }
+        .fa-fire:before { content: "🔥"; }
+        .fa-bolt:before { content: "⚡"; }
+        .fa-star:before { content: "⭐"; }
+        .fa-heart:before { content: "❤️"; }
+        .fa-home:before { content: "🏠"; }
+        .fa-user:before { content: "👤"; }
+        .fa-badge:before { content: "🔰"; }
+        .fa-list:before { content: "📋"; }
+        .fa-download:before { content: "⬇️"; }
+        .fa-times-circle:before { content: "❌"; }
+        .fa-hand-paper:before { content: "✋"; }
+        .fa-bell:before { content: "🔔"; }
+        .fa-wrench:before { content: "🔧"; }
+        .fa-lock:before { content: "🔒"; }
+        .fa-info-circle:before { content: "ℹ️"; }
+        .fa-calendar-check:before { content: "📆✓"; }
+        .fa-sunrise:before { content: "🌅"; }
+        .fa-moon:before { content: "🌙"; }
+        .fa-mountain:before { content: "🏔️"; }
+        .fa-tachometer-alt:before { content: "🏁"; }
+        .fa-stopwatch:before { content: "⏱️"; }
+        .fa-map-marker:before { content: "📍"; }
+        .fa-chevron-left:before { content: "◀"; }
+        .fa-chevron-right:before { content: "▶"; }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Wyzwanie 2025</h1>
-  </header>
-  
-  <div class="licznik">
-    Pozostało <span id="pozostalo-dni"></span> dni do końca wyzwania!
-  </div>
-  
-  <button id="dolacz-button">Dołącz do wyzwania</button>
+    <header>
+        <h1>Wyzwanie 2025</h1>
+    </header>
 
-  <section class="wykres-container">
-    <canvas id="wykres"></canvas>
-  </section>
+    <main>
+        <!-- Rules and Countdown Section -->
+        <section id="rules" class="section rules">
+            <div class="section-title">
+                <i class="fa fa-info-circle"></i>
+                <h2>Zasady wyzwania</h2>
+            </div>
+            <p>
+                Witaj w sportowym wyzwaniu 2025! Celem jest zdobycie <strong>2000 punktów</strong> jako pierwszy lub zgromadzenie największej liczby punktów do końca wyzwania.
+            </p>
+            <ul>
+                <li>Wyzwanie trwa od <strong>1 kwietnia do 30 września 2025</strong>.</li>
+                <li>Masz trzy opcje udziału: jako <strong>biegacz</strong> (2 punkty/km), <strong>rowerzysta</strong> (1 punkt/km) lub <strong>biegacz+rowerzysta</strong> (punkty z obu aktywności).</li>
+                <li>Po wyborze roli, nie możesz jej zmienić podczas wyzwania.</li>
+                <li>Wszystkie aktywności są automatycznie pobierane z Twojego konta Strava.</li>
+            </ul>
+            <div class="countdown">
+                <i class="fa fa-clock"></i>
+                <span id="countdown-timer">Trwa ładowanie...</span>
+            </div>
+            
+            <div class="join-btn-container">
+                <button id="join-btn" class="btn">
+                    <i class="fa fa-user-plus"></i>
+                    Dołącz do wyzwania
+                </button>
+            </div>
+        </section>
 
-  <section class="ranking">
-    <h2>Ranking</h2>
-    <div id="ranking-lista"></div>
-  </section>
+        <!-- Progress Chart Section -->
+        <section id="progress" class="section">
+            <div class="section-title">
+                <i class="fa fa-chart-line"></i>
+                <h2>Postęp wszystkich uczestników</h2>
+            </div>
+            <div class="chart-container">
+                <canvas id="progress-chart"></canvas>
+            </div>
+        </section>
 
-  <section class="aktywnosci">
-    <h2>Ostatnie aktywności</h2>
-    <div id="aktywnosci-lista"></div>
-  </section>
+        <!-- Participants Section -->
+        <section id="participants" class="section">
+            <div class="section-title">
+                <i class="fa fa-users"></i>
+                <h2>Ranking uczestników</h2>
+            </div>
+            <div id="participants-grid" class="participants-grid">
+                <!-- Participants will be dynamically added here -->
+            </div>
+        </section>
 
-  <nav>
-    <a href="#" class="active">
-      <img src="home.png" alt="Home">
-      Home
-    </a>
-    <a href="#">
-      <img src="ranking.png" alt="Ranking"> 
-      Ranking
-    </a>
-    <a href="#">
-      <img src="activity.png" alt="Aktywności">
-      Aktywności  
-    </a>
-    <a href="#">
-      <img src="profile.png" alt="Profil">
-      Profil
-    </a>
-  </nav>
+        <!-- Recent Activities Section -->
+        <section id="activities" class="section activities-container">
+            <div class="section-title">
+                <i class="fa fa-history"></i>
+                <h2>Ostatnie aktywności</h2>
+            </div>
+            <ul id="activity-list" class="activity-list">
+                <!-- Activities will be dynamically added here -->
+            </ul>
+            <div class="pagination">
+                <button id="prev-page" class="page-btn" disabled>
+                    <i class="fa fa-chevron-left"></i> Poprzednia
+                </button>
+                <button id="next-page" class="page-btn" disabled>
+                    Następna <i class="fa fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
 
-  <!-- Reszta elementów (modal, animacja ładowania) i skryptów JS bez zmian -->
+        <!-- Admin Panel Link -->
+        <p style="text-align: center; margin-top: 20px;">
+            <a href="#" id="admin-link">Panel administratora</a>
+        </p>
+    </main>
 
+    <footer>
+        <p>&copy; 2025 Wyzwanie 2025</p>
+    </footer>
+
+    <!-- Mobile Navigation for PWA -->
+    <div class="mobile-nav">
+        <div class="mobile-nav-buttons">
+            <a href="#rules" class="mobile-nav-btn active">
+                <i class="fa fa-info-circle"></i>
+                <span>Zasady</span>
+            </a>
+            <a href="#progress" class="mobile-nav-btn">
+                <i class="fa fa-chart-line"></i>
+                <span>Postęp</span>
+            </a>
+            <a href="#participants" class="mobile-nav-btn">
+                <i class="fa fa-users"></i>
+                <span>Ranking</span>
+            </a>
+            <a href="#activities" class="mobile-nav-btn">
+                <i class="fa fa-history"></i>
+                <span>Aktywności</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Join Modal -->
+    <div id="join-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Dołącz do wyzwania</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Wybierz swoją rolę w wyzwaniu. Pamiętaj, że tego wyboru nie można zmienić później!</p>
+                
+                <div class="role-selection">
+                    <div class="role-card runner-role" data-role="runner">
+                        <div class="role-icon">
+                            <i class="fa fa-running"></i>
+                        </div>
+                        <div class="role-name">Biegacz</div>
+                        <div class="role-description">2 punkty za każdy przebiegnięty kilometr</div>
+                    </div>
+                    
+                    <div class="role-card cyclist-role" data-role="cyclist">
+                        <div class="role-icon">
+                            <i class="fa fa-biking"></i>
+                        </div>
+                        <div class="role-name">Rowerzysta</div>
+                        <div class="role-description">1 punkt za każdy przejechany kilometr</div>
+                    </div>
+                    
+                    <div class="role-card combined-role" data-role="combined">
+                        <div class="role-icon">
+                            <i class="fa fa-running"></i>
+                            <i class="fa fa-biking"></i>
+                        </div>
+                        <div class="role-name">Biegacz + Rowerzysta</div>
+                        <div class="role-description">Punkty z obu aktywności</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="connect-strava-btn" class="btn btn-secondary" disabled>
+                    Połącz ze Strava
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Modal -->
+    <div id="loading-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p id="loading-message">Łączenie z kontem Strava...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Modal -->
+    <div id="admin-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Panel administratora</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="admin-login">
+                    <div class="form-group">
+                        <label for="admin-password">Hasło administratora:</label>
+                        <input type="password" id="admin-password" placeholder="Wprowadź hasło">
+                    </div>
+                    <button id="admin-login-btn" class="btn">Zaloguj</button>
+                </div>
+                
+                <div id="admin-panel" class="admin-panel">
+                    <div class="admin-section">
+                        <div class="admin-header">
+                            <h3>Ustawienia wyzwania</h3>
+                        </div>
+                        <div class="admin-grid">
+                            <div class="admin-card">
+                                <div class="form-group">
+                                    <label for="challenge-start">Data rozpoczęcia:</label>
+                                    <input type="date" id="challenge-start" value="2025-04-01">
+                                </div>
+                                <div class="form-group">
+                                    <label for="challenge-end">Data zakończenia:</label>
+                                    <input type="date" id="challenge-end" value="2025-09-30">
+                                </div>
+                                <button id="save-dates-btn" class="btn btn-outline">Zapisz daty</button>
+                            </div>
+                            
+                            <div class="admin-card">
+                                <div class="form-group">
+                                    <label for="test-mode">Tryb testowy:</label>
+                                    <select id="test-mode">
+                                        <option value="0">Wyłączony</option>
+                                        <option value="1">Włączony</option>
+                                    </select>
+                                </div>
+                                <button id="toggle-test-btn" class="btn btn-outline">Zastosuj</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-section">
+                        <div class="admin-header">
+                            <h3>Dane testowe</h3>
+                        </div>
+                        <div class="admin-grid">
+                            <div class="admin-card">
+                                <div class="form-group">
+                                    <label for="test-users">Liczba uczestników testowych:</label>
+                                    <input type="number" id="test-users" min="1" max="20" value="5">
+                                </div>
+                                <button id="generate-data-btn" class="btn btn-outline">Generuj dane</button>
+                            </div>
+                            
+                            <div class="admin-card">
+                                <div class="form-group">
+                                    <label>Resetowanie:</label>
+                                </div>
+                                <button id="reset-data-btn" class="btn btn-outline">Resetuj dane testowe</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Install Banner -->
+    <div id="install-banner" class="install-banner">
+        <div class="install-message">
+            <strong>Zainstaluj aplikację Wyzwanie 2025</strong>
+            <p>Dodaj do ekranu głównego dla lepszego doświadczenia!</p>
+        </div>
+        <div class="install-actions">
+            <button id="install-btn" class="btn">
+                <i class="fa fa-download"></i> Zainstaluj
+            </button>
+            <button id="close-install-btn" class="btn btn-outline">
+                <i class="fa fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <div class="notification-content">
+            <div class="notification-icon">
+                <i class="fa fa-info-circle"></i>
+            </div>
+            <div class="notification-message">
+                <div class="notification-title">Tytuł powiadomienia</div>
+                <div id="notification-text">Treść powiadomienia</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confetti Container -->
+    <div id="confetti-container" class="confetti-container"></div>
+
+    <script>
+        // Main App Class
+        class WyzwanieApp {
+            constructor() {
+                // App state
+                this.state = {
+                    user: null,
+                    participants: [],
+                    activities: [],
+                    currentPage: 0,
+                    itemsPerPage: 8,
+                    challengeStartDate: new Date('2025-04-01'),
+                    challengeEndDate: new Date('2025-09-30'),
+                    testMode: false,
+                    deferredPrompt: null,
+                    activitiesLoaded: false,
+                };
+
+                // Initialize the app
+                this.init();
+            }
+
+            async init() {
+                // Initialize UI elements
+                this.initUI();
+                
+                // Load data
+                await this.loadData();
+                
+                // Initialize event listeners
+                this.initEventListeners();
+                
+                // Initialize service worker
+                this.initServiceWorker();
+                
+                // Setup PWA installation
+                this.setupPWA();
+                
+                // Update countdown
+                this.updateCountdown();
+                setInterval(() => this.updateCountdown(), 1000 * 60); // Update every minute
+            }
+
+            initUI() {
+                // Progress chart
+                this.initChart();
+                
+                // Update countdown
+                this.updateCountdown();
+                
+                // Check if the app is in standalone mode
+                if (window.matchMedia('(display-mode: standalone)').matches || 
+                    window.navigator.standalone === true) {
+                    document.body.classList.add('standalone');
+                }
+
+                // Admin password (normally would be stored securely)
+                this.adminPassword = 'admin1234';
+
+                // Initialize Strava auth redirect URI
+                this.stravaRedirectUri = window.location.href.split('?')[0];
+            }
+
+            initChart() {
+                const ctx = document.getElementById('progress-chart').getContext('2d');
+                
+                // Create empty chart (will be populated later)
+                this.progressChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [],
+                        datasets: []
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                        plugins: {
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 93, 172, 0.8)',
+                                titleFont: {
+                                    weight: 'bold'
+                                },
+                                callbacks: {
+                                    title: function(context) {
+                                        return context[0].label;
+                                    },
+                                    label: function(context) {
+                                        return `${context.dataset.label}: ${context.parsed.y} punktów`;
+                                    }
+                                }
+                            },
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    boxWidth: 12,
+                                    padding: 15
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.05)'
+                                }
+                            },
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.05)'
+                                },
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + ' pkt';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            async loadData() {
+                // Check if there's a user stored in localStorage
+                const storedUser = localStorage.getItem('wyzwanie2025_user');
+                if (storedUser) {
+                    this.state.user = JSON.parse(storedUser);
+                    this.updateJoinButton();
+                }
+
+                // Check for Strava authentication callback
+                const urlParams = new URLSearchParams(window.location.search);
+                const code = urlParams.get('code');
+                
+                if (code && !this.state.user) {
+                    // Show loading
+                    this.showLoadingModal("Autoryzacja w Strava... Proszę czekać.");
+                    
+                    try {
+                        // Exchange code for access token (in real app, this would be done server-side)
+                        await this.mockStravaAuth(code);
+                        
+                        // Clear URL parameters
+                        window.history.replaceState({}, document.title, window.location.pathname);
+                    } catch (error) {
+                        this.showNotification("Błąd autoryzacji", "Nie udało się połączyć z kontem Strava. Spróbuj ponownie.", "error");
+                    } finally {
+                        // Hide loading
+                        this.hideLoadingModal();
+                    }
+                }
+
+                // Check for test mode
+                const testMode = localStorage.getItem('wyzwanie2025_testMode');
+                if (testMode) {
+                    this.state.testMode = testMode === 'true';
+                    document.getElementById('test-mode').value = this.state.testMode ? '1' : '0';
+                }
+
+                // Load participants and activities
+                await this.loadParticipants();
+                await this.loadActivities();
+                
+                // Update UI with the loaded data
+                this.updateParticipantsList();
+                this.updateActivitiesList();
+                this.updateProgressChart();
+            }
+
+            async loadParticipants() {
+                // In a real app, this would fetch from an API
+                // For demo, use localStorage or generate mock data
+                let participants = localStorage.getItem('wyzwanie2025_participants');
+                
+                if (participants) {
+                    this.state.participants = JSON.parse(participants);
+                } else if (this.state.testMode) {
+                    // Generate test data if in test mode
+                    this.generateTestData(5);
+                } else {
+                    this.state.participants = [];
+                }
+                
+                // Sort participants by points
+                this.sortParticipants();
+            }
+
+            async loadActivities() {
+                // In a real app, this would fetch from an API
+                // For demo, use localStorage or generate mock data
+                let activities = localStorage.getItem('wyzwanie2025_activities');
+                
+                if (activities) {
+                    this.state.activities = JSON.parse(activities);
+                    this.state.activitiesLoaded = true;
+                } else if (this.state.testMode) {
+                    // Generate test activities if in test mode
+                    this.generateTestActivities();
+                } else {
+                    this.state.activities = [];
+                }
+                
+                // Sort activities by date (newest first)
+                this.sortActivities();
+            }
+
+            sortParticipants() {
+                this.state.participants.sort((a, b) => b.points - a.points);
+            }
+
+            sortActivities() {
+                this.state.activities.sort((a, b) => new Date(b.date) - new Date(a.date));
+            }
+
+            updateParticipantsList() {
+                const container = document.getElementById('participants-grid');
+                container.innerHTML = '';
+
+                if (this.state.participants.length === 0) {
+                    const emptyMessage = document.createElement('div');
+                    emptyMessage.className = 'empty-message';
+                    emptyMessage.textContent = 'Brak uczestników. Bądź pierwszy i dołącz do wyzwania!';
+                    container.appendChild(emptyMessage);
+                    return;
+                }
+
+                this.state.participants.forEach((participant, index) => {
+                    const card = document.createElement('div');
+                    card.className = `participant-card ${participant.role}`;
+
+                    // Get level based on points
+                    const level = this.getParticipantLevel(participant);
+                    
+                    // Get streak badge if applicable
+                    const streakDays = this.getParticipantStreak(participant);
+                    
+                    card.innerHTML = `
+                        <div class="participant-header">
+                            <div class="participant-rank ${index < 3 ? 'rank-' + (index + 1) : ''}">#${index + 1}</div>
+                            <img src="${participant.avatar}" alt="${participant.name}" class="participant-avatar avatar-frame-${level.level}">
+                            <div class="participant-info">
+                                <div class="participant-name">${participant.name}</div>
+                                <div class="participant-role">
+                                    <i class="fa fa-${participant.role === 'runner' ? 'running' : participant.role === 'cyclist' ? 'biking' : 'medal'}"></i>
+                                    ${participant.role === 'runner' ? 'Biegacz' : participant.role === 'cyclist' ? 'Rowerzysta' : 'Biegacz+Rowerzysta'}
+                                </div>
+                            </div>
+                        </div>
+                        ${streakDays >= 3 ? `<div class="streak-badge"><i class="fa fa-fire"></i>${streakDays} dni</div>` : ''}
+                        <div class="participant-stats">
+                            <div class="stat-row">
+                                <div class="stat-label">Punkty:</div>
+                                <div class="stat-value">${participant.points}</div>
+                            </div>
+                            <div class="stat-row">
+                                <div class="stat-label">Do celu:</div>
+                                <div class="stat-value">${Math.max(0, 2000 - participant.points)}</div>
+                            </div>
+                            <div class="stat-row">
+                                <div class="stat-label">${participant.role === 'runner' ? 'Przebiegnięte:' : participant.role === 'cyclist' ? 'Przejechane:' : 'Dystans:'}</div>
+                                <div class="stat-value">
+                                    ${participant.role === 'runner' ? 
+                                        `${(participant.points / 2).toFixed(1)} km` : 
+                                        participant.role === 'cyclist' ? 
+                                        `${participant.points.toFixed(1)} km` : 
+                                        `${(participant.runDistance || 0).toFixed(1)} km / ${(participant.rideDistance || 0).toFixed(1)} km`}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${Math.min(100, (participant.points / 2000) * 100)}%"></div>
+                            </div>
+                            <div class="progress-label">
+                                <span>${level.name}</span>
+                                <span>${Math.min(100, ((participant.points / 2000) * 100).toFixed(1))}%</span>
+                            </div>
+                        </div>
+                        <button class="high-five-btn">
+                            <i class="fa fa-hand-paper"></i> Wyślij piątkę
+                            <span class="high-five-count">${participant.highFives || 0}</span>
+                        </button>
+                    `;
+                    
+                    // Add high five event listener
+                    const highFiveBtn = card.querySelector('.high-five-btn');
+                    highFiveBtn.addEventListener('click', () => {
+                        this.sendHighFive(participant.id);
+                    });
+                    
+                    container.appendChild(card);
+                });
+            }
+
+            updateActivitiesList() {
+                const container = document.getElementById('activity-list');
+                const prevBtn = document.getElementById('prev-page');
+                const nextBtn = document.getElementById('next-page');
+                container.innerHTML = '';
+
+                if (this.state.activities.length === 0) {
+                    const emptyMessage = document.createElement('li');
+                    emptyMessage.className = 'empty-message';
+                    emptyMessage.textContent = 'Brak aktywności. Rozpocznij wyzwanie!';
+                    container.appendChild(emptyMessage);
+                    
+                    prevBtn.disabled = true;
+                    nextBtn.disabled = true;
+                    return;
+                }
+
+                // Calculate pagination
+                const startIdx = this.state.currentPage * this.state.itemsPerPage;
+                const endIdx = Math.min(startIdx + this.state.itemsPerPage, this.state.activities.length);
+                const pageActivities = this.state.activities.slice(startIdx, endIdx);
+
+                // Update pagination buttons
+                prevBtn.disabled = this.state.currentPage === 0;
+                nextBtn.disabled = endIdx >= this.state.activities.length;
+
+                // Create activity items
+                pageActivities.forEach(activity => {
+                    const participant = this.state.participants.find(p => p.id === activity.participantId);
+                    if (!participant) return;
+
+                    const item = document.createElement('li');
+                    item.className = 'activity-item';
+
+                    const activityDate = new Date(activity.date);
+                    const formattedDate = activityDate.toLocaleDateString('pl-PL', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric'
+                    });
+                    
+                    const formattedTime = activityDate.toLocaleTimeString('pl-PL', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+
+                    item.innerHTML = `
+                        <div class="activity-icon ${activity.type === 'run' ? 'run-icon' : 'ride-icon'}">
+                            <i class="fa fa-${activity.type === 'run' ? 'running' : 'biking'}"></i>
+                        </div>
+                        <div class="activity-details">
+                            <div class="activity-title">${activity.name}</div>
+                            <div class="activity-meta">
+                                <div>${participant.name}</div>
+                                <div>${formattedDate} ${formattedTime}</div>
+                                <div>${activity.distance.toFixed(1)} km</div>
+                                <div>${activity.type === 'run' ? 
+                                    this.formatPace(activity.pace) : 
+                                    activity.speed.toFixed(1) + ' km/h'}</div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    container.appendChild(item);
+                });
+            }
+
+            updateProgressChart() {
+                // If no participants, clear the chart
+                if (this.state.participants.length === 0) {
+                    this.progressChart.data.labels = [];
+                    this.progressChart.data.datasets = [];
+                    this.progressChart.update();
+                    return;
+                }
+
+                // Generate date labels from challenge start to current date
+                const labels = [];
+                const startDate = new Date(this.state.challengeStartDate);
+                const endDate = new Date(Math.min(new Date(), this.state.challengeEndDate));
+                
+                for (let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
+                    labels.push(date.toLocaleDateString('pl-PL', { day: '2-digit', month: '2-digit' }));
+                }
+
+                // Prepare datasets for each participant
+                const datasets = this.state.participants.map((participant, index) => {
+                    // Get activities for this participant
+                    const participantActivities = this.state.activities.filter(
+                        a => a.participantId === participant.id
+                    );
+                    
+                    // Colors for different roles
+                    const roleColors = {
+                        'runner': 'rgb(255, 87, 34)',
+                        'cyclist': 'rgb(33, 150, 243)',
+                        'combined': 'rgb(156, 39, 176)'
+                    };
+
+                    // Generate daily points data
+                    const data = new Array(labels.length).fill(0);
+                    let totalPoints = 0;
+                    
+                    participantActivities.forEach(activity => {
+                        const activityDate = new Date(activity.date);
+                        const index = Math.floor((activityDate - startDate) / (1000 * 60 * 60 * 24));
+                        
+                        if (index >= 0 && index < data.length) {
+                            const points = activity.type === 'run' ? activity.distance * 2 : activity.distance;
+                            totalPoints += points;
+                            
+                            // Set cumulative points for this and all future days
+                            for (let i = index; i < data.length; i++) {
+                                data[i] = totalPoints;
+                            }
+                        }
+                    });
+
+                    // Create dataset for this participant
+                    return {
+                        label: participant.name,
+                        data: data,
+                        borderColor: roleColors[participant.role],
+                        backgroundColor: `${roleColors[participant.role]}20`,
+                        borderWidth: 2,
+                        pointRadius: 1,
+                        pointHoverRadius: 5,
+                        cubicInterpolationMode: 'monotone',
+                        tension: 0.4
+                    };
+                });
+
+                // Update chart data
+                this.progressChart.data.labels = labels;
+                this.progressChart.data.datasets = datasets;
+                this.progressChart.update();
+            }
+
+            updateCountdown() {
+                const countdownEl = document.getElementById('countdown-timer');
+                const now = new Date();
+                
+                // Challenge hasn't started yet
+                if (now < this.state.challengeStartDate) {
+                    const daysToStart = Math.ceil((this.state.challengeStartDate - now) / (1000 * 60 * 60 * 24));
+                    countdownEl.textContent = `Wyzwanie rozpocznie się za ${daysToStart} dni`;
+                    countdownEl.style.color = '#f39c12';
+                }
+                // Challenge is ongoing
+                else if (now >= this.state.challengeStartDate && now <= this.state.challengeEndDate) {
+                    const daysLeft = Math.ceil((this.state.challengeEndDate - now) / (1000 * 60 * 60 * 24));
+                    countdownEl.textContent = `Pozostało ${daysLeft} dni do końca wyzwania`;
+                    countdownEl.style.color = '#27ae60';
+                }
+                // Challenge has ended
+                else {
+                    countdownEl.textContent = 'Wyzwanie zostało zakończone';
+                    countdownEl.style.color = '#e74c3c';
+                }
+            }
+
+            updateJoinButton() {
+                const joinBtn = document.getElementById('join-btn');
+                
+                if (this.state.user) {
+                    joinBtn.textContent = 'Już uczestniczysz';
+                    joinBtn.disabled = true;
+                    joinBtn.classList.add('btn-disabled');
+                } else {
+                    joinBtn.innerHTML = '<i class="fa fa-user-plus"></i> Dołącz do wyzwania';
+                    joinBtn.disabled = false;
+                    joinBtn.classList.remove('btn-disabled');
+                }
+            }
+
+            getParticipantLevel(participant) {
+                const points = participant.points;
+                const role = participant.role;
+                
+                // Define levels based on role
+                const levels = {
+                    runner: [
+                        { level: 1, min: 0, max: 249, name: "Początkujący Biegacz" },
+                        { level: 2, min: 250, max: 749, name: "Regularny Biegacz" },
+                        { level: 3, min: 750, max: 1499, name: "Zaawansowany Biegacz" },
+                        { level: 4, min: 1500, max: 1999, name: "Mistrz Biegania" },
+                        { level: 5, min: 2000, max: Infinity, name: "Ultramaratończyk" }
+                    ],
+                    cyclist: [
+                        { level: 1, min: 0, max: 249, name: "Początkujący Kolarz" },
+                        { level: 2, min: 250, max: 749, name: "Regularny Rowerzysta" },
+                        { level: 3, min: 750, max: 1499, name: "Zaawansowany Kolarz" },
+                        { level: 4, min: 1500, max: 1999, name: "Mistrz Kolarstwa" },
+                        { level: 5, min: 2000, max: Infinity, name: "Szosowy Czempion" }
+                    ],
+                    combined: [
+                        { level: 1, min: 0, max: 249, name: "Początkujący Sportowiec" },
+                        { level: 2, min: 250, max: 749, name: "Regularny Sportowiec" },
+                        { level: 3, min: 750, max: 1499, name: "Zaawansowany Sportowiec" },
+                        { level: 4, min: 1500, max: 1999, name: "Mistrz Wszechstronny" },
+                        { level: 5, min: 2000, max: Infinity, name: "Multi-czempion" }
+                    ]
+                };
+                
+                // Get level for current role and points
+                return levels[role].find(level => points >= level.min && points <= level.max);
+            }
+
+            getParticipantStreak(participant) {
+                // This would be calculated based on actual activity data
+                // For demo, return random streak between 0-30 days
+                return participant.streak || 0;
+            }
+
+            initEventListeners() {
+                // Join button
+                document.getElementById('join-btn').addEventListener('click', () => {
+                    this.openJoinModal();
+                });
+                
+                // Modal close buttons
+                document.querySelectorAll('.modal-close').forEach(btn => {
+                    btn.addEventListener('click', e => {
+                        const modalId = e.target.closest('.modal-overlay').id;
+                        document.getElementById(modalId).classList.remove('visible');
+                    });
+                });
+                
+                // Role selection
+                document.querySelectorAll('.role-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        // Remove selected class from all cards
+                        document.querySelectorAll('.role-card').forEach(c => c.classList.remove('selected'));
+                        
+                        // Add selected class to clicked card
+                        card.classList.add('selected');
+                        
+                        // Enable connect button
+                        document.getElementById('connect-strava-btn').disabled = false;
+                    });
+                });
+                
+                // Connect Strava button
+                document.getElementById('connect-strava-btn').addEventListener('click', () => {
+                    const selectedRole = document.querySelector('.role-card.selected')?.dataset.role;
+                    
+                    if (selectedRole) {
+                        this.connectWithStrava(selectedRole);
+                    }
+                });
+                
+                // Pagination buttons
+                document.getElementById('prev-page').addEventListener('click', () => {
+                    if (this.state.currentPage > 0) {
+                        this.state.currentPage--;
+                        this.updateActivitiesList();
+                    }
+                });
+                
+                document.getElementById('next-page').addEventListener('click', () => {
+                    const maxPage = Math.ceil(this.state.activities.length / this.state.itemsPerPage) - 1;
+                    if (this.state.currentPage < maxPage) {
+                        this.state.currentPage++;
+                        this.updateActivitiesList();
+                    }
+                });
+                
+                // Admin link
+                document.getElementById('admin-link').addEventListener('click', e => {
+                    e.preventDefault();
+                    this.openAdminModal();
+                });
+                
+                // Admin login button
+                document.getElementById('admin-login-btn').addEventListener('click', () => {
+                    this.loginAdmin();
+                });
+                
+                // Admin password input (enter key)
+                document.getElementById('admin-password').addEventListener('keyup', e => {
+                    if (e.key === 'Enter') {
+                        this.loginAdmin();
+                    }
+                });
+                
+                // Save challenge dates button
+                document.getElementById('save-dates-btn').addEventListener('click', () => {
+                    this.saveChallengeSettings();
+                });
+                
+                // Toggle test mode button
+                document.getElementById('toggle-test-btn').addEventListener('click', () => {
+                    this.toggleTestMode();
+                });
+                
+                // Generate test data button
+                document.getElementById('generate-data-btn').addEventListener('click', () => {
+                    const numUsers = parseInt(document.getElementById('test-users').value) || 5;
+                    this.generateTestData(numUsers);
+                });
+                
+                // Reset test data button
+                document.getElementById('reset-data-btn').addEventListener('click', () => {
+                    this.resetTestData();
+                });
+                
+                // Install button
+                document.getElementById('install-btn').addEventListener('click', () => {
+                    this.installPWA();
+                });
+                
+                // Close install banner button
+                document.getElementById('close-install-btn').addEventListener('click', () => {
+                    document.getElementById('install-banner').classList.remove('visible');
+                    localStorage.setItem('wyzwanie2025_installBannerClosed', 'true');
+                });
+                
+                // Mobile navigation
+                document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
+                    btn.addEventListener('click', e => {
+                        document.querySelectorAll('.mobile-nav-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                    });
+                });
+            }
+
+            openJoinModal() {
+                // Reset role selection
+                document.querySelectorAll('.role-card').forEach(card => card.classList.remove('selected'));
+                document.getElementById('connect-strava-btn').disabled = true;
+                
+                // Show modal
+                document.getElementById('join-modal').classList.add('visible');
+            }
+
+            openAdminModal() {
+                // Reset admin form
+                document.getElementById('admin-password').value = '';
+                document.getElementById('admin-login').style.display = 'block';
+                document.getElementById('admin-panel').style.display = 'none';
+                
+                // Show modal
+                document.getElementById('admin-modal').classList.add('visible');
+            }
+
+            loginAdmin() {
+                const password = document.getElementById('admin-password').value;
+                
+                if (password === this.adminPassword) {
+                    document.getElementById('admin-login').style.display = 'none';
+                    document.getElementById('admin-panel').style.display = 'block';
+                    
+                    // Set form values
+                    document.getElementById('challenge-start').value = this.formatDateForInput(this.state.challengeStartDate);
+                    document.getElementById('challenge-end').value = this.formatDateForInput(this.state.challengeEndDate);
+                    document.getElementById('test-mode').value = this.state.testMode ? '1' : '0';
+                } else {
+                    this.showNotification("Błąd logowania", "Niepoprawne hasło administratora.", "error");
+                }
+            }
+
+            saveChallengeSettings() {
+                const startDate = new Date(document.getElementById('challenge-start').value);
+                const endDate = new Date(document.getElementById('challenge-end').value);
+                
+                if (startDate >= endDate) {
+                    this.showNotification("Błąd ustawień", "Data rozpoczęcia musi być wcześniejsza niż data zakończenia.", "error");
+                    return;
+                }
+                
+                this.state.challengeStartDate = startDate;
+                this.state.challengeEndDate = endDate;
+                
+                // Save to localStorage
+                localStorage.setItem('wyzwanie2025_challengeStartDate', startDate.toISOString());
+                localStorage.setItem('wyzwanie2025_challengeEndDate', endDate.toISOString());
+                
+                this.updateCountdown();
+                this.updateProgressChart();
+                
+                this.showNotification("Sukces", "Daty wyzwania zostały zaktualizowane.", "success");
+            }
+
+            toggleTestMode() {
+                const testMode = document.getElementById('test-mode').value === '1';
+                this.state.testMode = testMode;
+                
+                // Save to localStorage
+                localStorage.setItem('wyzwanie2025_testMode', testMode);
+                
+                if (testMode && !this.state.activitiesLoaded) {
+                    // Generate test data if not already loaded
+                    const numUsers = parseInt(document.getElementById('test-users').value) || 5;
+                    this.generateTestData(numUsers);
+                }
+                
+                this.showNotification(
+                    "Tryb testowy", 
+                    testMode ? "Tryb testowy został włączony." : "Tryb testowy został wyłączony.", 
+                    "info"
+                );
+            }
+
+            generateTestData(numUsers = 5) {
+                // Clear existing data
+                this.resetTestData();
+                
+                // Create test participants
+                const roles = ['runner', 'cyclist', 'combined'];
+                const avatars = [
+                    'https://i.pravatar.cc/150?img=1',
+                    'https://i.pravatar.cc/150?img=2',
+                    'https://i.pravatar.cc/150?img=3',
+                    'https://i.pravatar.cc/150?img=4',
+                    'https://i.pravatar.cc/150?img=5',
+                    'https://i.pravatar.cc/150?img=6',
+                    'https://i.pravatar.cc/150?img=7',
+                    'https://i.pravatar.cc/150?img=8',
+                    'https://i.pravatar.cc/150?img=9',
+                    'https://i.pravatar.cc/150?img=10'
+                ];
+                
+                const testParticipants = [];
+                
+                for (let i = 0; i < numUsers; i++) {
+                    const role = roles[Math.floor(Math.random() * roles.length)];
+                    const participant = {
+                        id: `test-${i + 1}`,
+                        name: `Uczestnik ${i + 1}`,
+                        role: role,
+                        avatar: avatars[i % avatars.length],
+                        points: 0,
+                        runDistance: 0,
+                        rideDistance: 0,
+                        streak: Math.floor(Math.random() * 14),
+                        highFives: Math.floor(Math.random() * 10)
+                    };
+                    
+                    testParticipants.push(participant);
+                }
+                
+                this.state.participants = testParticipants;
+                
+                // Generate activities
+                this.generateTestActivities();
+                
+                // Update UI
+                this.sortParticipants();
+                this.updateParticipantsList();
+                this.updateActivitiesList();
+                this.updateProgressChart();
+                
+                this.showNotification("Dane testowe", `Wygenerowano ${numUsers} uczestników testowych z aktywnościami.`, "success");
+            }
+
+            generateTestActivities() {
+                const testActivities = [];
+                const activityNames = [
+                    'Poranny trening',
+                    'Popołudniowy wypad',
+                    'Weekendowa przejażdżka',
+                    'Interwały',
+                    'Regeneracyjne bieganie',
+                    'Długi dystans',
+                    'Tempo run',
+                    'Górska przejażdżka',
+                    'Miejska trasa',
+                    'Trening siłowy',
+                    'Trening szybkościowy'
+                ];
+                
+                // Start from 10 days before challenge start
+                const startDate = new Date(this.state.challengeStartDate);
+                startDate.setDate(startDate.getDate() - 10);
+                
+                // End on today or challenge end date, whichever comes first
+                const endDate = new Date(Math.min(new Date(), this.state.challengeEndDate));
+                
+                // For each participant
+                this.state.participants.forEach(participant => {
+                    // Reset points and distances
+                    participant.points = 0;
+                    participant.runDistance = 0;
+                    participant.rideDistance = 0;
+                    
+                    // Random number of activities (10-30)
+                    const numActivities = 10 + Math.floor(Math.random() * 21);
+                    
+                    // Generate activities
+                    for (let i = 0; i < numActivities; i++) {
+                        // Random date between startDate and endDate
+                        const activityDate = new Date(startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime()));
+                        
+                        // Only include activities during the challenge period
+                        if (activityDate >= this.state.challengeStartDate && activityDate <= endDate) {
+                            // Determine activity type based on participant role
+                            let activityType;
+                           if (participant.role === 'runner') {
+                                activityType = 'run';
+                            } else if (participant.role === 'cyclist') {
+                                activityType = 'ride';
+                            } else {
+                                // Combined role - randomly choose run or ride
+                                activityType = Math.random() < 0.5 ? 'run' : 'ride';
+                            }
+                            
+                            // Random distance (3-30km for runs, 10-80km for rides)
+                            const distance = activityType === 'run' 
+                                ? 3 + Math.random() * 27 
+                                : 10 + Math.random() * 70;
+                            
+                            // Random pace for runs (4-7 min/km)
+                            const pace = 4 * 60 + Math.random() * 3 * 60; // seconds per km
+                            
+                            // Random speed for rides (15-35 km/h)
+                            const speed = 15 + Math.random() * 20;
+                            
+                            // Calculate points
+                            const points = activityType === 'run' ? distance * 2 : distance;
+                            
+                            // Create activity
+                            const activity = {
+                                id: `activity-${participant.id}-${i}`,
+                                participantId: participant.id,
+                                name: activityNames[Math.floor(Math.random() * activityNames.length)],
+                                type: activityType,
+                                distance: distance,
+                                date: activityDate.toISOString(),
+                                pace: pace,
+                                speed: speed
+                            };
+                            
+                            // Add activity to list
+                            testActivities.push(activity);
+                            
+                            // Update participant stats
+                            participant.points += points;
+                            if (activityType === 'run') {
+                                participant.runDistance += distance;
+                            } else {
+                                participant.rideDistance += distance;
+                            }
+                        }
+                    }
+                });
+                
+                this.state.activities = testActivities;
+                this.state.activitiesLoaded = true;
+                
+                // Save to localStorage
+                localStorage.setItem('wyzwanie2025_participants', JSON.stringify(this.state.participants));
+                localStorage.setItem('wyzwanie2025_activities', JSON.stringify(this.state.activities));
+                
+                // Sort activities
+                this.sortActivities();
+            }
+
+            resetTestData() {
+                // Clear participants and activities
+                this.state.participants = [];
+                this.state.activities = [];
+                this.state.activitiesLoaded = false;
+                
+                // Clear from localStorage
+                localStorage.removeItem('wyzwanie2025_participants');
+                localStorage.removeItem('wyzwanie2025_activities');
+                
+                // Update UI
+                this.updateParticipantsList();
+                this.updateActivitiesList();
+                this.updateProgressChart();
+                
+                this.showNotification("Reset danych", "Dane testowe zostały zresetowane.", "info");
+            }
+
+            connectWithStrava(role) {
+                // In a real app, this would redirect to Strava OAuth
+                const selectedRole = role;
+                
+                // Hide join modal
+                document.getElementById('join-modal').classList.remove('visible');
+                
+                // Show loading modal
+                this.showLoadingModal("Przekierowywanie do Strava...");
+                
+                // In a real app, you would redirect to Strava OAuth
+                // For demo, simulate the OAuth flow
+                setTimeout(() => {
+                    // Simulate Strava OAuth redirect
+                    if (this.state.testMode) {
+                        // Mock auth in test mode
+                        this.mockStravaAuth(null, selectedRole);
+                    } else {
+                        // For demonstration purposes, we'll use a popup window approach
+                        // In production, you would use a proper OAuth redirect
+                        const clientId = '12345'; // Your Strava API client ID
+                        const redirectUri = encodeURIComponent(this.stravaRedirectUri);
+                        const scope = 'read,activity:read';
+                        
+                        // Store the selected role for use after OAuth callback
+                        localStorage.setItem('wyzwanie2025_pendingRole', selectedRole);
+                        
+                        // Redirect to Strava authorization page
+                        window.location.href = `https://www.strava.com/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
+                    }
+                }, 1000);
+            }
+
+            async mockStravaAuth(code, selectedRole) {
+                // If we have a code from OAuth callback, get the role from localStorage
+                if (code && !selectedRole) {
+                    selectedRole = localStorage.getItem('wyzwanie2025_pendingRole');
+                    localStorage.removeItem('wyzwanie2025_pendingRole');
+                }
+                
+                // Create a mock user
+                const mockUser = {
+                    id: 'strava-' + Date.now(),
+                    name: 'Twoje Imię',
+                    role: selectedRole || 'runner',
+                    avatar: 'https://i.pravatar.cc/150?img=50',
+                    points: 0,
+                    runDistance: 0,
+                    rideDistance: 0,
+                    streak: 0,
+                    highFives: 0
+                };
+                
+                // Save user to state and localStorage
+                this.state.user = mockUser;
+                localStorage.setItem('wyzwanie2025_user', JSON.stringify(mockUser));
+                
+                // Add user to participants if not already present
+                if (!this.state.participants.find(p => p.id === mockUser.id)) {
+                    this.state.participants.push(mockUser);
+                    this.sortParticipants();
+                    localStorage.setItem('wyzwanie2025_participants', JSON.stringify(this.state.participants));
+                }
+                
+                // Update UI
+                this.updateJoinButton();
+                this.updateParticipantsList();
+                this.updateProgressChart();
+                
+                // Show success notification with confetti
+                this.hideLoadingModal();
+                this.showNotification(
+                    "Gratulacje!", 
+                    "Dołączyłeś do wyzwania! Twoje aktywności ze Strava będą teraz automatycznie synchronizowane.", 
+                    "success"
+                );
+                this.showConfetti();
+            }
+
+            sendHighFive(participantId) {
+                // Find participant
+                const participant = this.state.participants.find(p => p.id === participantId);
+                
+                if (participant) {
+                    // Increment high fives
+                    participant.highFives = (participant.highFives || 0) + 1;
+                    
+                    // Update localStorage
+                    localStorage.setItem('wyzwanie2025_participants', JSON.stringify(this.state.participants));
+                    
+                    // Update UI
+                    this.updateParticipantsList();
+                    
+                    // Show notification
+                    this.showNotification(
+                        "Wysłano piątkę!", 
+                        `Wysłałeś piątkę do ${participant.name}.`, 
+                        "success"
+                    );
+                }
+            }
+
+            showLoadingModal(message) {
+                document.getElementById('loading-message').textContent = message;
+                document.getElementById('loading-modal').classList.add('visible');
+            }
+
+            hideLoadingModal() {
+                document.getElementById('loading-modal').classList.remove('visible');
+            }
+
+            showNotification(title, message, type = 'info') {
+                const notification = document.getElementById('notification');
+                const notificationTitle = notification.querySelector('.notification-title');
+                const notificationText = document.getElementById('notification-text');
+                const notificationIcon = notification.querySelector('.notification-icon i');
+                
+                // Set content
+                notificationTitle.textContent = title;
+                notificationText.textContent = message;
+                
+                // Set icon based on type
+                switch (type) {
+                    case 'success':
+                        notificationIcon.className = 'fa fa-check';
+                        notificationIcon.style.color = '#27ae60';
+                        break;
+                    case 'error':
+                        notificationIcon.className = 'fa fa-times';
+                        notificationIcon.style.color = '#e74c3c';
+                        break;
+                    case 'warning':
+                        notificationIcon.className = 'fa fa-exclamation';
+                        notificationIcon.style.color = '#f39c12';
+                        break;
+                    default: // info
+                        notificationIcon.className = 'fa fa-info-circle';
+                        notificationIcon.style.color = '#3498db';
+                        break;
+                }
+                
+                // Show notification
+                notification.classList.add('visible');
+                
+                // Auto-hide after 5 seconds
+                setTimeout(() => {
+                    notification.classList.remove('visible');
+                }, 5000);
+            }
+
+            showConfetti() {
+                const container = document.getElementById('confetti-container');
+                container.innerHTML = '';
+                
+                const colors = ['#f44336', '#2196F3', '#FFEB3B', '#4CAF50', '#9C27B0'];
+                
+                // Create confetti pieces
+                for (let i = 0; i < 100; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = -10 + 'px';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDuration = 3 + Math.random() * 2 + 's';
+                    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                    
+                    container.appendChild(confetti);
+                }
+                
+                // Clean up after animation
+                setTimeout(() => {
+                    container.innerHTML = '';
+                }, 6000);
+            }
+
+            formatPace(paceInSeconds) {
+                const minutes = Math.floor(paceInSeconds / 60);
+                const seconds = Math.floor(paceInSeconds % 60);
+                return `${minutes}:${seconds.toString().padStart(2, '0')} min/km`;
+            }
+
+            formatDateForInput(date) {
+                return date.toISOString().split('T')[0];
+            }
+
+            initServiceWorker() {
+                if ('serviceWorker' in navigator) {
+                    // Register service worker from inline script
+                    const swCode = `
+                        self.addEventListener('install', (event) => {
+                            event.waitUntil(
+                                caches.open('wyzwanie2025-v1').then((cache) => {
+                                    return cache.addAll([
+                                        './',
+                                        './index.html'
+                                    ]);
+                                })
+                            );
+                        });
+                        
+                        self.addEventListener('fetch', (event) => {
+                            event.respondWith(
+                                caches.match(event.request).then((response) => {
+                                    return response || fetch(event.request).then((fetchRes) => {
+                                        // Don't cache API calls
+                                        if (event.request.url.includes('api.strava.com')) {
+                                            return fetchRes;
+                                        }
+                                        
+                                        return caches.open('wyzwanie2025-v1').then((cache) => {
+                                            cache.put(event.request, fetchRes.clone());
+                                            return fetchRes;
+                                        });
+                                    });
+                                }).catch(() => {
+                                    // Return offline fallback
+                                    if (event.request.headers.get('accept').includes('text/html')) {
+                                        return caches.match('./index.html');
+                                    }
+                                })
+                            );
+                        });
+                    `;
+                    
+                    // Create a Blob containing the service worker code
+                    const blob = new Blob([swCode], {type: 'application/javascript'});
+                    const swUrl = URL.createObjectURL(blob);
+                    
+                    // Register the service worker
+                    navigator.serviceWorker.register(swUrl)
+                        .then((registration) => {
+                            console.log('Service Worker registered with scope:', registration.scope);
+                        })
+                        .catch((error) => {
+                            console.error('Service Worker registration failed:', error);
+                        });
+                }
+            }
+
+            setupPWA() {
+                // Listen for beforeinstallprompt event
+                window.addEventListener('beforeinstallprompt', (e) => {
+                    // Prevent Chrome from automatically showing the prompt
+                    e.preventDefault();
+                    // Stash the event so it can be triggered later
+                    this.state.deferredPrompt = e;
+                    
+                    // Show the install banner if not previously closed
+                    const bannerClosed = localStorage.getItem('wyzwanie2025_installBannerClosed');
+                    if (!bannerClosed) {
+                        document.getElementById('install-banner').classList.add('visible');
+                    }
+                });
+                
+                // Listen for app installed event
+                window.addEventListener('appinstalled', () => {
+                    // Hide the install banner
+                    document.getElementById('install-banner').classList.remove('visible');
+                    // Clear the deferredPrompt
+                    this.state.deferredPrompt = null;
+                    // Log the installation
+                    console.log('PWA was installed');
+                });
+            }
+
+            installPWA() {
+                if (this.state.deferredPrompt) {
+                    // Show the install prompt
+                    this.state.deferredPrompt.prompt();
+                    
+                    // Wait for the user to respond to the prompt
+                    this.state.deferredPrompt.userChoice.then((choiceResult) => {
+                        if (choiceResult.outcome === 'accepted') {
+                            console.log('User accepted the install prompt');
+                        } else {
+                            console.log('User dismissed the install prompt');
+                        }
+                        // Clear the deferredPrompt
+                        this.state.deferredPrompt = null;
+                    });
+                }
+            }
+        }
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', () => {
+            const app = new WyzwanieApp();
+        });
+    </script>
 </body>
 </html>
