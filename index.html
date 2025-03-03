@@ -415,6 +415,7 @@ ICB9CiAgXQp9">
             object-fit: cover;
             margin-right: 12px;
             border: 3px solid transparent;
+            cursor: pointer;
         }
 
         .runner .participant-avatar {
@@ -436,6 +437,7 @@ ICB9CiAgXQp9">
         .participant-name {
             font-weight: 600;
             font-size: 1.1rem;
+            cursor: pointer;
         }
 
         .participant-role {
@@ -558,6 +560,7 @@ ICB9CiAgXQp9">
 
         .activity-title {
             font-weight: 600;
+            cursor: pointer;
         }
 
         .activity-meta {
@@ -569,6 +572,10 @@ ICB9CiAgXQp9">
 
         .activity-meta div {
             margin-right: 12px;
+        }
+
+        .activity-meta .participant-name {
+            cursor: pointer;
         }
 
         .pagination {
@@ -601,6 +608,8 @@ ICB9CiAgXQp9">
 
         /* Modal */
         .modal-overlay {
+            position: fixed;
+            .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -1501,6 +1510,9 @@ ICB9CiAgXQp9">
                 
                 // Initialize Strava auth redirect URI
                 this.stravaRedirectUri = window.location.href.split('?')[0];
+                
+                // Initialize server URL - w prawdziwej aplikacji należy użyć adresu serwera
+                this.serverUrl = 'https://api.wyzwanie2025.pl';
             }
 
             loadStoredSettings() {
@@ -1594,15 +1606,42 @@ ICB9CiAgXQp9">
             }
 
             async loadData() {
-                // Check if there's a user stored in localStorage
-                const storedUser = localStorage.getItem('wyzwanie2025_user');
-                if (storedUser) {
-                    this.state.user = JSON.parse(storedUser);
-                    this.updateJoinButton();
+                // Sprawdź, czy jest token w localStorage lub w URL (parametr token)
+                const urlParams = new URLSearchParams(window.location.search);
+                const token = urlParams.get('token');
+                
+                if (token) {
+                    // Zapisz token w sessionStorage
+                    sessionStorage.setItem('wyzwanie2025_token', token);
+                    // Usuń parametr z URL
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }
+                
+                // Sprawdź token sesji
+                const sessionToken = sessionStorage.getItem('wyzwanie2025_token');
+                
+                if (sessionToken) {
+                    // Spróbuj zalogować użytkownika przy użyciu tokenu
+                    try {
+                        await this.loginWithToken(sessionToken);
+                    } catch (error) {
+                        console.error('Błąd logowania z tokenem:', error);
+                        sessionStorage.removeItem('wyzwanie2025_token');
+                    }
+                } else {
+                    // Sprawdź czy jest stravaID w localStorage
+                    const stravaId = localStorage.getItem('wyzwanie2025_stravaId');
+                    if (stravaId) {
+                        try {
+                            await this.loginWithStravaId(stravaId);
+                        } catch (error) {
+                            console.error('Błąd logowania z Strava ID:', error);
+                            localStorage.removeItem('wyzwanie2025_stravaId');
+                        }
+                    }
                 }
 
                 // Check for Strava authentication callback
-                const urlParams = new URLSearchParams(window.location.search);
                 const code = urlParams.get('code');
                 
                 if (code) {
@@ -1638,42 +1677,232 @@ ICB9CiAgXQp9">
                     this.fetchStravaActivities();
                 }
             }
-
-            async loadParticipants() {
-                // In a real app, this would fetch from an API
-                // For demo, use localStorage or generate mock data
-                let participants = localStorage.getItem('wyzwanie2025_participants');
-                
-                if (participants) {
-                    this.state.participants = JSON.parse(participants);
-                } else if (this.state.testMode) {
-                    // Generate test data if in test mode
-                    this.generateTestData(5);
-                } else {
-                    this.state.participants = [];
+            
+            // Nowa metoda do logowania z tokenem sesji
+            async loginWithToken(token) {
+                // W rzeczywistej aplikacji wysłalibyśmy token do serwera w celu weryfikacji
+                if (this.state.testMode) {
+                    // W trybie testowym symulujemy odpowiedź serwera
+                    const mockUser = {
+                        id: `strava-12345`,
+                        name: `Jan Kowalski`,
+                        role: 'runner',
+                        avatar: 'https://i.pravatar.cc/150?img=50',
+                        points: 0,
+                        runDistance: 0,
+                        rideDistance: 0,
+                        streak: 0,
+                        stravaId: '12345'
+                    };
+                    
+                    this.state.user = mockUser;
+                    localStorage.setItem('wyzwanie2025_user', JSON.stringify(mockUser));
+                    localStorage.setItem('wyzwanie2025_stravaId', mockUser.stravaId);
+                    
+                    this.updateJoinButton();
+                    return;
                 }
                 
-                // Sort participants by points
+                try {
+                    // W prawdziwej aplikacji:
+                    // const response = await fetch(`${this.serverUrl}/auth/verify-token`, {
+                    //     method: 'POST',
+                    //     headers: {
+                    //         'Content-Type': 'application/json',
+                    //         'Authorization': `Bearer ${token}`
+                    //     }
+                    // });
+                    // const data = await response.json();
+                    // if (data.success) {
+                    //     this.state.user = data.user;
+                    //     localStorage.setItem('wyzwanie2025_stravaId', data.user.stravaId);
+                    //     this.updateJoinButton();
+                    // }
+                } catch (error) {
+                    console.error('Błąd weryfikacji tokenu:', error);
+                    throw error;
+                }
+            }
+            
+            // Nowa metoda do logowania przy użyciu ID Strava
+            async loginWithStravaId(stravaId) {
+                // W rzeczywistej aplikacji pobieramy dane użytkownika z serwera
+                if (this.state.testMode) {
+                    // W trybie testowym symulujemy odpowiedź serwera
+                    const mockUser = {
+                        id: `strava-${stravaId}`,
+                        name: `Jan Kowalski`,
+                        role: 'runner',
+                        avatar: 'https://i.pravatar.cc/150?img=50',
+                        points: 0,
+                        runDistance: 0,
+                        rideDistance: 0,
+                        streak: 0,
+                        stravaId: stravaId
+                    };
+                    
+                    this.state.user = mockUser;
+                    localStorage.setItem('wyzwanie2025_user', JSON.stringify(mockUser));
+                    
+                    // Sprawdź, czy użytkownik jest już uczestnikiem
+                    const existingParticipant = this.state.participants.find(p => p.id === mockUser.id);
+                    if (!existingParticipant) {
+                        this.state.participants.push(mockUser);
+                        this.sortParticipants();
+                        this.saveParticipantsToServer();
+                    }
+                    
+                    this.updateJoinButton();
+                    return;
+                }
+                
+                try {
+                    // W prawdziwej aplikacji:
+                    // const response = await fetch(`${this.serverUrl}/users/${stravaId}`);
+                    // const data = await response.json();
+                    // if (data.success) {
+                    //     this.state.user = data.user;
+                    //     this.updateJoinButton();
+                    // }
+                } catch (error) {
+                    console.error('Błąd pobierania danych użytkownika:', error);
+                    throw error;
+                }
+            }
+
+            async loadParticipants() {
+                // W prawdziwej aplikacji, pobieralibyśmy uczestników z serwera
+                if (this.state.testMode) {
+                    let participants = localStorage.getItem('wyzwanie2025_participants');
+                    
+                    if (participants) {
+                        this.state.participants = JSON.parse(participants);
+                    } else {
+                        // Generuj testowe dane, jeśli nie ma uczestników
+                        this.generateTestData(5);
+                    }
+                } else {
+                    // Pobierz uczestników z serwera
+                    try {
+                        // W prawdziwej aplikacji:
+                        // const response = await fetch(`${this.serverUrl}/participants`);
+                        // const data = await response.json();
+                        // if (data.success) {
+                        //     this.state.participants = data.participants;
+                        // }
+                        
+                        // Dla demonstracji:
+                        let participants = localStorage.getItem('wyzwanie2025_participants');
+                        if (participants) {
+                            this.state.participants = JSON.parse(participants);
+                        } else {
+                            this.state.participants = [];
+                        }
+                    } catch (error) {
+                        console.error('Błąd pobierania uczestników:', error);
+                        this.state.participants = [];
+                    }
+                }
+                
+                // Sortuj uczestników wg punktów
                 this.sortParticipants();
             }
 
             async loadActivities() {
-                // In a real app, this would fetch from an API
-                // For demo, use localStorage or generate mock data
-                let activities = localStorage.getItem('wyzwanie2025_activities');
-                
-                if (activities) {
-                    this.state.activities = JSON.parse(activities);
-                    this.state.activitiesLoaded = true;
-                } else if (this.state.testMode) {
-                    // Generate test activities if in test mode
-                    this.generateTestActivities();
+                // W prawdziwej aplikacji, pobieralibyśmy aktywności z serwera
+                if (this.state.testMode) {
+                    let activities = localStorage.getItem('wyzwanie2025_activities');
+                    
+                    if (activities) {
+                        this.state.activities = JSON.parse(activities);
+                        this.state.activitiesLoaded = true;
+                    } else if (this.state.participants.length > 0) {
+                        // Generuj testowe aktywności, jeśli są uczestnicy
+                        this.generateTestActivities();
+                    } else {
+                        this.state.activities = [];
+                    }
                 } else {
-                    this.state.activities = [];
+                    // Pobierz aktywności z serwera
+                    try {
+                        // W prawdziwej aplikacji:
+                        // const response = await fetch(`${this.serverUrl}/activities`);
+                        // const data = await response.json();
+                        // if (data.success) {
+                        //     this.state.activities = data.activities;
+                        //     this.state.activitiesLoaded = true;
+                        // }
+                        
+                        // Dla demonstracji:
+                        let activities = localStorage.getItem('wyzwanie2025_activities');
+                        if (activities) {
+                            this.state.activities = JSON.parse(activities);
+                            this.state.activitiesLoaded = true;
+                        } else {
+                            this.state.activities = [];
+                        }
+                    } catch (error) {
+                        console.error('Błąd pobierania aktywności:', error);
+                        this.state.activities = [];
+                    }
                 }
                 
-                // Sort activities by date (newest first)
+                // Sortuj aktywności wg daty (najnowsze pierwsze)
                 this.sortActivities();
+            }
+            
+            // Nowa metoda do zapisywania uczestników na serwer
+            async saveParticipantsToServer() {
+                if (this.state.testMode) {
+                    // W trybie testowym zapisujemy do localStorage
+                    localStorage.setItem('wyzwanie2025_participants', JSON.stringify(this.state.participants));
+                    return;
+                }
+                
+                try {
+                    // W prawdziwej aplikacji:
+                    // const token = sessionStorage.getItem('wyzwanie2025_token');
+                    // await fetch(`${this.serverUrl}/participants`, {
+                    //     method: 'POST',
+                    //     headers: {
+                    //         'Content-Type': 'application/json',
+                    //         'Authorization': `Bearer ${token}`
+                    //     },
+                    //     body: JSON.stringify({ participants: this.state.participants })
+                    // });
+                    
+                    // Dla demonstracji:
+                    localStorage.setItem('wyzwanie2025_participants', JSON.stringify(this.state.participants));
+                } catch (error) {
+                    console.error('Błąd zapisywania uczestników:', error);
+                }
+            }
+            
+            // Nowa metoda do zapisywania aktywności na serwer
+            async saveActivitiesToServer() {
+                if (this.state.testMode) {
+                    // W trybie testowym zapisujemy do localStorage
+                    localStorage.setItem('wyzwanie2025_activities', JSON.stringify(this.state.activities));
+                    return;
+                }
+                
+                try {
+                    // W prawdziwej aplikacji:
+                    // const token = sessionStorage.getItem('wyzwanie2025_token');
+                    // await fetch(`${this.serverUrl}/activities`, {
+                    //     method: 'POST',
+                    //     headers: {
+                    //         'Content-Type': 'application/json',
+                    //         'Authorization': `Bearer ${token}`
+                    //     },
+                    //     body: JSON.stringify({ activities: this.state.activities })
+                    // });
+                    
+                    // Dla demonstracji:
+                    localStorage.setItem('wyzwanie2025_activities', JSON.stringify(this.state.activities));
+                } catch (error) {
+                    console.error('Błąd zapisywania aktywności:', error);
+                }
             }
 
             sortParticipants() {
@@ -1709,9 +1938,9 @@ ICB9CiAgXQp9">
                     card.innerHTML = `
                         <div class="participant-header">
                             <div class="participant-rank ${index < 3 ? 'rank-' + (index + 1) : ''}">#${index + 1}</div>
-                            <img src="${participant.avatar}" alt="${participant.name}" class="participant-avatar avatar-frame-${level.level}">
+                            <img src="${participant.avatar}" alt="${participant.name}" class="participant-avatar avatar-frame-${level.level}" data-strava-id="${participant.stravaId || ''}">
                             <div class="participant-info">
-                                <div class="participant-name">${participant.name}</div>
+                                <div class="participant-name" data-strava-id="${participant.stravaId || ''}">${participant.name}</div>
                                 <div class="participant-role">
                                     <i class="fa fa-${participant.role === 'runner' ? 'running' : participant.role === 'cyclist' ? 'biking' : 'medal'}"></i>
                                     ${participant.role === 'runner' ? 'Biegacz' : participant.role === 'cyclist' ? 'Rowerzysta' : 'Biegacz+Rowerzysta'}
@@ -1751,6 +1980,16 @@ ICB9CiAgXQp9">
                     `;
                     
                     container.appendChild(card);
+                });
+                
+                // Dodaj obsługę kliknięć w awatar i nazwę uczestnika
+                document.querySelectorAll('.participant-avatar, .participant-name').forEach(element => {
+                    element.addEventListener('click', () => {
+                        const stravaId = element.dataset.stravaId;
+                        if (stravaId) {
+                            window.open(`https://www.strava.com/athletes/${stravaId}`, '_blank');
+                        }
+                    });
                 });
             }
 
@@ -1799,15 +2038,19 @@ ICB9CiAgXQp9">
                         hour: '2-digit',
                         minute: '2-digit'
                     });
+                    
+                    // Dodaj atrybut ze Strava ID aktywności, jeśli istnieje
+                    const stravaActivityId = activity.id.startsWith('strava-') ? activity.id.replace('strava-', '') : '';
+                    const stravaAthleteId = participant.stravaId || '';
 
                     item.innerHTML = `
                         <div class="activity-icon ${activity.type === 'run' ? 'run-icon' : 'ride-icon'}">
                             <i class="fa fa-${activity.type === 'run' ? 'running' : 'biking'}"></i>
                         </div>
                         <div class="activity-details">
-                            <div class="activity-title">${activity.name}</div>
+                            <div class="activity-title" data-strava-id="${stravaActivityId}">${activity.name}</div>
                             <div class="activity-meta">
-                                <div>${participant.name}</div>
+                                <div class="participant-name" data-strava-id="${stravaAthleteId}">${participant.name}</div>
                                 <div>${formattedDate} ${formattedTime}</div>
                                 <div>${activity.distance.toFixed(1)} km</div>
                                 <div>${activity.type === 'run' ? 
@@ -1824,6 +2067,26 @@ ICB9CiAgXQp9">
                     `;
                     
                     container.appendChild(item);
+                });
+                
+                // Dodaj obsługę kliknięć w nazwę aktywności
+                document.querySelectorAll('.activity-title').forEach(element => {
+                    element.addEventListener('click', () => {
+                        const stravaId = element.dataset.stravaId;
+                        if (stravaId) {
+                            window.open(`https://www.strava.com/activities/${stravaId}`, '_blank');
+                        }
+                    });
+                });
+                
+                // Dodaj obsługę kliknięć w nazwę uczestnika
+                document.querySelectorAll('.activity-meta .participant-name').forEach(element => {
+                    element.addEventListener('click', () => {
+                        const stravaId = element.dataset.stravaId;
+                        if (stravaId) {
+                            window.open(`https://www.strava.com/athletes/${stravaId}`, '_blank');
+                        }
+                    });
                 });
                 
                 // Add event listeners for high five buttons
@@ -1952,7 +2215,7 @@ ICB9CiAgXQp9">
                     runner: [
                         { level: 1, min: 0, max: 249, name: "Początkujący Biegacz" },
                         { level: 2, min: 250, max: 749, name: "Regularny Biegacz" },
-                        { level: 3, min: 750, max: 1499, name: "Zaawansowany Biegacz" },
+                       { level: 3, min: 750, max: 1499, name: "Zaawansowany Biegacz" },
                         { level: 4, min: 1500, max: 1999, name: "Mistrz Biegania" },
                         { level: 5, min: 2000, max: Infinity, name: "Ultramaratończyk" }
                     ],
@@ -2250,7 +2513,8 @@ ICB9CiAgXQp9">
                         points: 0,
                         runDistance: 0,
                         rideDistance: 0,
-                        streak: Math.floor(Math.random() * 14)
+                        streak: Math.floor(Math.random() * 14),
+                        stravaId: `10000${i + 1}` // Dodajemy symulowane ID Strava
                     };
                     
                     testParticipants.push(participant);
@@ -2266,6 +2530,10 @@ ICB9CiAgXQp9">
                 this.updateParticipantsList();
                 this.updateActivitiesList();
                 this.updateProgressChart();
+                
+                // Zapisz dane na serwerze (lub w localStorage w trybie testowym)
+                this.saveParticipantsToServer();
+                this.saveActivitiesToServer();
                 
                 this.showNotification("Dane testowe", `Wygenerowano ${numUsers} uczestników testowych z aktywnościami.`, "success");
             }
@@ -2335,9 +2603,12 @@ ICB9CiAgXQp9">
                             // Calculate points
                             const points = activityType === 'run' ? distance * 2 : distance;
                             
+                            // Generuj identyfikator aktywności Strava
+                            const stravaActivityId = `90000${participant.id.replace('test-', '')}${i}`;
+                            
                             // Create activity with high fives
                             const activity = {
-                                id: `activity-${participant.id}-${i}`,
+                                id: `strava-${stravaActivityId}`,
                                 participantId: participant.id,
                                 name: activityNames[Math.floor(Math.random() * activityNames.length)],
                                 type: activityType,
@@ -2364,10 +2635,6 @@ ICB9CiAgXQp9">
                 
                 this.state.activities = testActivities;
                 this.state.activitiesLoaded = true;
-                
-                // Save to localStorage
-                localStorage.setItem('wyzwanie2025_participants', JSON.stringify(this.state.participants));
-                localStorage.setItem('wyzwanie2025_activities', JSON.stringify(this.state.activities));
                 
                 // Sort activities
                 this.sortActivities();
@@ -2424,6 +2691,7 @@ ICB9CiAgXQp9">
                         expiresAt: tokenResponse.expires_at
                     };
                     
+                    // W prawdziwej aplikacji, token byłby zapisany na serwerze
                     localStorage.setItem('wyzwanie2025_stravaTokens', JSON.stringify(this.state.tokens));
                     
                     // Fetch athlete data from Strava
@@ -2438,7 +2706,7 @@ ICB9CiAgXQp9">
                     localStorage.removeItem('wyzwanie2025_pendingRole');
                     
                     // Create user
-                    this.createUserFromStravaData(athleteData, role);
+                    await this.createUserFromStravaData(athleteData, role);
                     
                     // Fetch activities
                     await this.fetchStravaActivities();
@@ -2463,7 +2731,19 @@ ICB9CiAgXQp9">
 
             async exchangeCodeForToken(code) {
                 try {
-                    // In a real app, this would be done server-side
+                    // W prawdziwej aplikacji, wysłalibyśmy żądanie do serwera, który wymieniłby kod na token
+                    // Serwer powinien przechowywać client_secret - nie powinno być ono widoczne po stronie klienta
+                    
+                    if (this.state.testMode) {
+                        // W trybie testowym symulujemy odpowiedź serwera
+                        return {
+                            access_token: 'mock_access_token',
+                            refresh_token: 'mock_refresh_token',
+                            expires_at: Math.floor(Date.now() / 1000) + 21600
+                        };
+                    }
+                    
+                    // W rzeczywistej aplikacji kod na token wymieniałby serwer
                     const response = await fetch('https://www.strava.com/oauth/token', {
                         method: 'POST',
                         headers: {
@@ -2484,7 +2764,8 @@ ICB9CiAgXQp9">
                     return await response.json();
                 } catch (error) {
                     console.error('Error exchanging code for token:', error);
-                    // For demo purposes, return a mock token
+                    
+                    // W trybie testowym zwracamy symulowane dane
                     if (this.state.testMode) {
                         return {
                             access_token: 'mock_access_token',
@@ -2530,7 +2811,7 @@ ICB9CiAgXQp9">
                 }
             }
 
-            createUserFromStravaData(athleteData, role) {
+            async createUserFromStravaData(athleteData, role) {
                 // Create user from Strava data
                 const user = {
                     id: `strava-${athleteData.id}`,
@@ -2546,14 +2827,27 @@ ICB9CiAgXQp9">
                 
                 // Save user to state
                 this.state.user = user;
+                
+                // W rzeczywistej aplikacji, dane użytkownika byłyby zapisane na serwerze
+                // Na potrzeby demonstracji używamy localStorage
                 localStorage.setItem('wyzwanie2025_user', JSON.stringify(user));
+                localStorage.setItem('wyzwanie2025_stravaId', athleteData.id.toString());
+                
+                // Zapisz token sesji
+                if (this.state.testMode) {
+                    // W trybie testowym symulujemy token sesji
+                    const sessionToken = 'test_session_token_' + Date.now();
+                    sessionStorage.setItem('wyzwanie2025_token', sessionToken);
+                }
                 
                 // Add to participants if not already present
                 const existingParticipant = this.state.participants.find(p => p.id === user.id);
                 if (!existingParticipant) {
                     this.state.participants.push(user);
                     this.sortParticipants();
-                    localStorage.setItem('wyzwanie2025_participants', JSON.stringify(this.state.participants));
+                    
+                    // Zapisz uczestników na serwerze
+                    await this.saveParticipantsToServer();
                 }
                 
                 // Update UI
@@ -2617,6 +2911,19 @@ ICB9CiAgXQp9">
 
             async refreshStravaToken() {
                 try {
+                    // W rzeczywistej aplikacji, odświeżanie tokenu byłoby obsługiwane przez serwer
+                    if (this.state.testMode) {
+                        // W trybie testowym symulujemy odświeżony token
+                        this.state.tokens = {
+                            accessToken: 'refreshed_mock_access_token',
+                            refreshToken: 'refreshed_mock_refresh_token',
+                            expiresAt: Math.floor(Date.now() / 1000) + 21600
+                        };
+                        
+                        localStorage.setItem('wyzwanie2025_stravaTokens', JSON.stringify(this.state.tokens));
+                        return;
+                    }
+                    
                     const response = await fetch('https://www.strava.com/oauth/token', {
                         method: 'POST',
                         headers: {
@@ -2708,10 +3015,9 @@ ICB9CiAgXQp9">
                 // Sort activities
                 this.sortActivities();
                 
-                // Save to localStorage
-                localStorage.setItem('wyzwanie2025_user', JSON.stringify(this.state.user));
-                localStorage.setItem('wyzwanie2025_participants', JSON.stringify(this.state.participants));
-                localStorage.setItem('wyzwanie2025_activities', JSON.stringify(this.state.activities));
+                // Zapisz dane na serwerze
+                await this.saveParticipantsToServer();
+                await this.saveActivitiesToServer();
                 
                 // Update UI
                 this.sortParticipants();
@@ -2786,9 +3092,12 @@ ICB9CiAgXQp9">
                     // Calculate points
                     const points = activityType === 'run' ? distance * 2 : distance;
                     
+                    // Generate Strava activity ID
+                    const stravaActivityId = `mock-${Date.now()}-${i}`;
+                    
                     // Create activity
                     const activity = {
-                        id: `mock-${user.id}-${i}`,
+                        id: `strava-${stravaActivityId}`,
                         participantId: user.id,
                         name: activityNames[Math.floor(Math.random() * activityNames.length)],
                         type: activityType,
@@ -2822,10 +3131,9 @@ ICB9CiAgXQp9">
                 // Sort activities
                 this.sortActivities();
                 
-                // Save to localStorage
-                localStorage.setItem('wyzwanie2025_user', JSON.stringify(user));
-                localStorage.setItem('wyzwanie2025_participants', JSON.stringify(this.state.participants));
-                localStorage.setItem('wyzwanie2025_activities', JSON.stringify(this.state.activities));
+                // Zapisz dane na serwerze
+                this.saveParticipantsToServer();
+                this.saveActivitiesToServer();
                 
                 // Update UI
                 this.sortParticipants();
@@ -2840,7 +3148,7 @@ ICB9CiAgXQp9">
                 );
             }
 
-            sendHighFive(activityId) {
+            async sendHighFive(activityId) {
                 // Find activity
                 const activityIndex = this.state.activities.findIndex(a => a.id === activityId);
                 
@@ -2852,8 +3160,8 @@ ICB9CiAgXQp9">
                     // Update in state
                     this.state.activities[activityIndex] = activity;
                     
-                    // Update localStorage
-                    localStorage.setItem('wyzwanie2025_activities', JSON.stringify(this.state.activities));
+                    // Zapisz dane na serwerze
+                    await this.saveActivitiesToServer();
                     
                     // Update UI
                     this.updateActivitiesList();
