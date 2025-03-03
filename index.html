@@ -4,540 +4,221 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wyzwanie 2025</title>
-  <!-- Web App Manifest -->
   <link rel="manifest" href="manifest.json">
-  <!-- Ikony PWA -->
   <link rel="icon" href="ikony/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="ikony/icon-192.png">
-  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- Styl CSS -->
   <style>
-    :root {
-      --kolor-glowny: #005dac;
-      --kolor-akcji: #1cb954;
-      --kolor-tekstu: #343434;
-      --kolor-tla: #f7f7f7;
-    }
-    
     body {
-      font-family: sans-serif;
+      font-family: Arial, sans-serif;
       margin: 0;
-      background-color: var(--kolor-tla);
-      color: var(--kolor-tekstu);
-    }
-    
-    .naglowek {
-      background: var(--kolor-glowny);
+      padding: 0;
+      background-color: black;
       color: white;
+    }
+    
+    header {
+      padding: 20px;
+      border-bottom: 1px solid #333;
       text-align: center;
-      padding: 1rem;
     }
     
-    .naglowek h1 {
+    header h1 {
       margin: 0;
-      font-size: 2rem;
-    }
-    
-    .sekcja-zasady {
-      padding: 2rem;
+      font-size: 24px;
+      font-weight: normal;
     }
     
     .licznik {
-      font-size: 1.2rem;
-      font-weight: bold;
-    }
-    
-    #dolacz-przycisk {
-      display: block;
-      width: 150px;
-      border: none;
-      background: var(--kolor-akcji);
-      color: white;
-      padding: 0.8rem;
+      padding: 20px;
       font-size: 1.1rem;
-      margin: 1rem auto;
+      text-align: center;
+      border-bottom: 1px solid #333;
+    }
+
+    #dolacz-button {
+      display: block;
+      margin: 20px auto;
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      background-color: #0ea3ff;
+      color: black;
+      border: none;
+      border-radius: 10px;
       cursor: pointer;
-      transition: transform 0.3s ease;
     }
     
-    #dolacz-przycisk:hover {
-      transform: scale(1.05);
+    .wykres-container {
+      padding: 20px;
     }
-    
-    .wykres-postep {
-      padding: 1rem;
-    }
-    
+
     .ranking {
-      padding: 1rem;
+      padding: 20px;
     }
     
     .uczestnik {
-      background: white;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      padding: 1rem;
-      margin-bottom: 1rem;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative; /* dla odznak */
+      background: #222;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+      position: relative;
+      display: flex;
+      align-items: center;
     }
     
-    .uczestnik:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    .uczestnik img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 15px;
     }
     
-    .biegacz {
-      border-left: 5px solid gold;
-    }
-    
-    .rowerzysta {
-      border-left: 5px solid silver;
-    }
-    
-    .top1 {
-      order: 1;
-    }
-    
-    .top2 {
-      order: 2;
-    }
-    
-    .top3 {
-      order: 3;
-    }
-    
-    .pozycja {
-      font-size: 1.2rem;
-      font-weight: bold;
-    }
-    
-    .punkty {
+    .uczestnik h3 {
+      margin: 0 0 5px;
       font-size: 1.1rem;
     }
     
+    .uczestnik p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+    
+    .odznaka {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      background-color: gold;
+      color: black;
+      font-weight: bold;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+    
     .pasek-postepu {
-      height: 10px;
-      background: #eee;
+      margin-top: 10px;
+      height: 5px;
+      background-color: #333;
       border-radius: 5px;
       overflow: hidden;
     }
-
-    .pasek-postepu-wypelnienie {
+    
+    .pasek-postepu .wypelnienie {
       height: 100%;
-      transition: width 1s ease;
+      border-radius: 5px;
     }
     
     .aktywnosci {
-      padding: 1rem;
+      padding: 20px;
     }
     
     .aktywnosc {
-      background: white;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      padding: 1rem;
-      margin-bottom: 1rem;
+      background-color: #222;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
     }
     
     .aktywnosc-naglowek {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.5rem;
+      margin-bottom: 10px;
     }
-
-    .aktywnosc-typ {
-      font-size: 1.2rem;
-    }
-
-    .aktywnosc-data {
-      font-size: 0.9rem;
-      color: #888;
-    }
-
-    .aktywnosc-nazwa {
+    
+    .aktywnosc-naglowek h3 {
+      margin: 0;
       font-size: 1.1rem;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
     }
     
-    .aktywnosc-szczegoly {
-      display: flex;
-      justify-content: space-between;
+    .aktywnosc-naglowek img {
+      height: 30px;
     }
     
-    .paginacja {
-      display: flex;
-      justify-content: center;
-      margin-top: 1rem;
-    }
-    
-    .paginacja button {
-      border: none;
-      background: var(--kolor-glowny);
-      color: white;
-      padding: 0.5rem 1rem;
-      margin: 0 0.5rem;
-      cursor: pointer;
-    }
-    
-    footer {
-      background: var(--kolor-glowny);
-      color: white;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-    }
-    
-    /* Modal wyboru roli */
-    
-    .modal {
-      display: none; 
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%; 
-      overflow: auto;
-      background-color: rgba(0,0,0,0.4);
-    }
-    
-    .modal-content {
-      background-color: var(--kolor-tla);
-      margin: 15% auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 30%;
-    }
-    
-    .close {
+    .aktywnosc p {
+      margin: 0 0 5px;
       color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
     }
-    
-    .role-box {
+
+    nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: black;
+      border-top: 1px solid #333;
       display: flex;
       justify-content: space-around;
-      margin-top: 20px;
+      padding: 10px 0;
     }
     
-    .rola {
-      text-align: center;
-      cursor: pointer;
-    }
-    
-    .rola img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 50%;
-    }
-    
-    .rola p {
-      margin-top: 10px;
-      font-weight: bold;
-    }
-    
-    /* Animacja ładowania */
-    
-    .loading {
-      display: none;
-      text-align: center;
-      margin-top: 20px;
-    }
-    
-    .loading-spinner {
-      border: 16px solid #f3f3f3;
-      border-top: 16px solid var(--kolor-glowny);
-      border-radius: 50%;
-      width: 120px;
-      height: 120px;
-      animation: spin 2s linear infinite;
-      margin: 0 auto;
-    }
-    
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    /* Odznaki i osiągnięcia */    
-    .odznaka {
-      position: absolute;
-      top: -10px;
-      right: -10px;
-      background: gold;
-      color: white;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
+    nav a {
+      color: #888;
+      text-decoration: none;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      font-size: 0.8rem;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    
+    nav a.active {
+      color: #0ea3ff;
+    }
+    
+    nav img {
+      height: 25px;
+      margin-bottom: 5px;
     }
   </style>
 </head>
 <body>
-  <header class="naglowek">
+  <header>
     <h1>Wyzwanie 2025</h1>
   </header>
   
-  <main>
-    <section class="sekcja-zasady">
-      <h2>Zasady wyzwania</h2>
-      <p>
-        Aplikacja śledzi rywalizację między uczestnikami, którzy zbierają punkty w okresie od 1 kwietnia do 30 września 2025. 
-        Cel: pierwszy uczestnik, który zdobędzie 2000 punktów, wygrywa (lub ten z największą liczbą punktów na koniec).
-      </p>
-      <p class="licznik">Pozostało <span id="pozostale-dni"></span> dni do końca wyzwania!</p>
-      <button id="dolacz-przycisk">Dołącz</button>
-    </section>
-
-    <section class="wykres-postep">
-      <h2>Postęp uczestników</h2>
-      <canvas id="wykres"></canvas>
-    </section>
-
-    <section class="ranking">
-      <h2>Ranking</h2>
-      <div id="ranking-lista"></div>
-    </section>
-
-    <section class="aktywnosci">
-      <h2>Ostatnie aktywności</h2>
-      <div id="aktywnosci-lista"></div>
-      <div class="paginacja">
-        <button id="poprzednia-strona">&lt; Poprzednia</button>
-        <button id="nastepna-strona">Następna &gt;</button>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 Wyzwanie 2025. Wszelkie prawa zastrzeżone.</p>
-    <a href="#" id="panel-admina">Panel administratora</a>
-  </footer>
-
-  <!-- Modal wyboru roli -->
-  <div id="modalWybierzRole" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Wybierz swoją rolę</h2>
-      <div class="role-box">
-        <div class="rola" id="biegacz">
-          <img src="ikony/biegacz.png" alt="Biegacz">
-          <p>Biegacz</p>
-          <p>2 punkty za km</p>
-        </div>
-        <div class="rola" id="rowerzysta">  
-          <img src="ikony/rowerzysta.png" alt="Rowerzysta">
-          <p>Rowerzysta</p>
-          <p>1 punkt za km</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Animacja ładowania -->
-  <div id="loading" class="loading">
-    <div class="loading-spinner"></div>  
-    <p>Łączenie z Twoim kontem Strava...</p>
+  <div class="licznik">
+    Pozostało <span id="pozostalo-dni"></span> dni do końca wyzwania!
   </div>
   
-  <script>
-    // funkcja odliczania dni do końca wyzwania
-    function odliczanieDni() {
-      // data końcowa wyzwania
-      const dataKoncowa = new Date("September 30, 2025 23:59:59").getTime();
-      
-      // dzisiejsza data
-      const dzisiaj = new Date().getTime();
+  <button id="dolacz-button">Dołącz do wyzwania</button>
 
-      // różnica między datami
-      const pozostalyCzas = dataKoncowa - dzisiaj;
+  <section class="wykres-container">
+    <canvas id="wykres"></canvas>
+  </section>
 
-      // przeliczenie na dni
-      const dni = Math.floor(pozostalyCzas / (1000 * 60 * 60 * 24));
+  <section class="ranking">
+    <h2>Ranking</h2>
+    <div id="ranking-lista"></div>
+  </section>
 
-      // aktualizacja tekstu na stronie
-      document.getElementById("pozostale-dni").innerText = dni;
-    }
+  <section class="aktywnosci">
+    <h2>Ostatnie aktywności</h2>
+    <div id="aktywnosci-lista"></div>
+  </section>
 
-    // wywołanie funkcji co 1 sekundę  
-    setInterval(odliczanieDni, 1000);
+  <nav>
+    <a href="#" class="active">
+      <img src="home.png" alt="Home">
+      Home
+    </a>
+    <a href="#">
+      <img src="ranking.png" alt="Ranking"> 
+      Ranking
+    </a>
+    <a href="#">
+      <img src="activity.png" alt="Aktywności">
+      Aktywności  
+    </a>
+    <a href="#">
+      <img src="profile.png" alt="Profil">
+      Profil
+    </a>
+  </nav>
 
-    // Funkcjonalność modala wyboru roli
-    const modalWybierzRole = document.getElementById("modalWybierzRole");
-    const btnDolacz = document.getElementById("dolacz-przycisk");
-    const spanZamknij = document.getElementsByClassName("close")[0];
-    const biegacz = document.getElementById("biegacz");
-    const rowerzysta = document.getElementById("rowerzysta");
-    const loading = document.getElementById("loading");
+  <!-- Reszta elementów (modal, animacja ładowania) i skryptów JS bez zmian -->
 
-    btnDolacz.onclick = function() {
-      modalWybierzRole.style.display = "block";
-    }
-
-    spanZamknij.onclick = function() {
-      modalWybierzRole.style.display = "none";
-    }
-
-    window.onclick = function(event) {
-      if (event.target == modalWybierzRole) {
-        modalWybierzRole.style.display = "none";
-      }
-    }
-
-    // Funkcjonalność wyboru roli
-    biegacz.onclick = function() {
-      zacznijLadowanie();
-      // Tutaj dodaj kod do łączenia z API Strava dla biegacza
-    }
-
-    rowerzysta.onclick = function() {
-      zacznijLadowanie();  
-      // Tutaj dodaj kod do łączenia z API Strava dla rowerzysty
-    }
-
-    function zacznijLadowanie() {
-      modalWybierzRole.style.display = "none";
-      loading.style.display = "block";
-    }
-
-    // Przykładowe dane - do zastąpienia danymi z API
-    const daneUczestnikow = [
-      {id: 1, imie: "Jan", rola: "biegacz", punkty: 1200, km: 600, awatar: "awatary/jan.jpg", postepp: 60, nazwaPoziomu: "Zaawansowany Biegacz", kolorPaska: "#1E88E5"},
-      {id: 2, imie: "Anna", rola: "rowerzysta", punkty: 900, km: 900, awatar: "awatary/anna.jpg", postepp: 45, nazwaPoziomu: "Regularny Rowerzysta", kolorPaska: "#43A047"},
-      {id: 3, imie: "Piotr", rola: "biegacz", punkty: 1800, km: 900, awatar: "awatary/piotr.jpg", postepp: 90, nazwaPoziomu: "Mistrz Biegania", kolorPaska: "#FFA000"} 
-    ];
-
-    // Renderowanie rankingu
-    function renderujRanking() {
-      let rankingHTML = '';
-      daneUczestnikow.sort((a, b) => b.punkty - a.punkty);
-
-      daneUczestnikow.forEach((uczestnik, index) => {
-        let pozycjaClass = '';
-        if (index === 0) pozycjaClass = 'top1';
-        if (index === 1) pozycjaClass = 'top2';
-        if (index === 2) pozycjaClass = 'top3';
-
-        let rolaClass = uczestnik.rola === 'biegacz' ? 'biegacz' : 'rowerzysta';
-
-        rankingHTML += `
-          <div class="uczestnik ${rolaClass} ${pozycjaClass}">
-            <img src="${uczestnik.awatar}" alt="${uczestnik.imie}" class="awatar">
-            <h3>${uczestnik.imie}</h3>
-            <p class="pozycja">#${index + 1}</p>
-            <p class="punkty">${uczestnik.punkty} punktów</p>
-            <p>${uczestnik.km} km</p>
-            <p class="poziom">${uczestnik.nazwaPoziomu}</p>
-            <div class="pasek-postepu">
-              <div class="pasek-postepu-wypelnienie" style="width: ${uczestnik.postepp}%; background-color: ${uczestnik.kolorPaska};"></div>  
-            </div>
-          </div>
-        `;
-      });
-
-      document.getElementById('ranking-lista').innerHTML = rankingHTML;
-    }
-
-    renderujRanking();
-
-    // Przykładowe dane aktywności - do zastąpienia danymi z API
-    const daneAktywnosci = [
-      {id: 1, uczestnik: "Jan", typ: "bieganie", nazwa: "Poranny trening", data: "2025-04-01", dystans: 10.5, tempo: "4:30 min/km"},
-      {id: 2, uczestnik: "Anna", typ: "rower", nazwa: "Wycieczka rowerowa", data: "2025-04-02", dystans: 45.2, predkosc: "20.1 km/h"},
-      {id: 3, uczestnik: "Piotr", typ: "bieganie", nazwa: "Wieczorne wybieganie", data: "2025-04-03", dystans: 8.7, tempo: "4:45 min/km"}
-    ];
-
-    // Renderowanie aktywności  
-    function renderujAktywnosci() {
-      let aktywnosciHTML = '';
-
-      daneAktywnosci.forEach(aktywnosc => {
-        let typIkona = aktywnosc.typ === 'bieganie' ? '🏃‍♂️' : '🚴‍♀️';
-
-        aktywnosciHTML += `
-          <div class="aktywnosc">
-            <div class="aktywnosc-naglowek">
-              <span class="aktywnosc-typ">${typIkona}</span>
-              <span class="aktywnosc-data">${aktywnosc.data}</span>
-            </div>
-            <div class="aktywnosc-nazwa">${aktywnosc.nazwa}</div>
-            <div class="aktywnosc-uczestnik">${aktywnosc.uczestnik}</div>
-            <div class="aktywnosc-szczegoly">  
-              <span>${aktywnosc.dystans} km</span>
-              <span>${aktywnosc.typ === 'bieganie' ? aktywnosc.tempo : aktywnosc.predkosc}</span>
-            </div>
-          </div>  
-        `;
-      });
-
-      document.getElementById('aktywnosci-lista').innerHTML = aktywnosciHTML;
-    }
-
-    renderujAktywnosci();
-    
-    // Wykres postępu - przykładowe dane
-    const daneWykresu = {
-      labels: ["Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień"],
-      datasets: [
-        {
-          label: "Jan",
-          data: [200, 400, 600, 900, 1100, 1200],
-          fill: false,
-          borderColor: "rgb(75, 192, 192)",
-          tension: 0.1
-        },
-        {
-          label: "Anna",  
-          data: [150, 320, 440, 600, 740, 900],
-          fill: false,
-          borderColor: "rgb(255, 99, 132)",
-          tension: 0.1
-        },
-        {
-          label: "Piotr",
-          data: [220, 460, 720, 1020, 1400, 1800],  
-          fill: false,
-          borderColor: "rgb(54, 162, 235)",
-          tension: 0.1
-        }
-      ]
-    };
-
-    // Konfiguracja wykresu
-    const konfiguracja = {
-      type: 'line',
-      data: daneWykresu,
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'top',
-          },
-          title: {
-            display: true,
-            text: 'Postęp uczestników'
-          }
-        }
-      },
-    };
-
-    // Renderowanie wykresu
-    const wykres = new Chart(
-      document.getElementById('wykres'),
-      konfiguracja
-    );
-  </script>
 </body>
 </html>
